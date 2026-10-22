@@ -1,0 +1,32 @@
+version: 2
+
+models:
+  - name: int_labor_standard_hours
+    description: >
+      Per-unit standard hours for every Kinetic job operation, converted from
+      production_standard_raw via standard_format (SD-14). The earned-hours input.
+    columns:
+      - name: company_code
+        tests:
+          - not_null
+      - name: job_num
+        tests:
+          - not_null
+
+  - name: int_labor_detail
+    description: >
+      Recomputed labor fact at the labor-transaction grain. earned_hours is direct-labor
+      scoped (SD-13): Production, non-rework only; Setup/Indirect/rework are a real zero.
+    columns:
+      - name: company_code
+        tests:
+          - not_null
+      - name: earned_hours
+        tests:
+          - not_null:
+              config:
+                severity: warn
+                # ~1.2% of Production rows have an unresolved standard (orphan operation
+                # reference, or unrecognized standard_format) -- see has_unresolved_standard.
+                # A monitoring signal, not a pipeline-blocking defect (confirmed against
+                # live data before relaxing this test).

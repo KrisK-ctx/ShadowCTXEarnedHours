@@ -23,6 +23,7 @@ with source as (
         stdbasis                as standard_basis,
         opsperpart              as ops_per_part,
         qtyper                  as quantity_per,
+        qtypercycle             as quantity_per_cycle,
         actprodhours            as act_production_hours,
         actsetuphours           as act_setup_hours,
         qtycompleted            as quantity_completed,
