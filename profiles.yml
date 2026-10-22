@@ -1,0 +1,12 @@
+ctx_earned_hours_shadow:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: ""
+      user: ""
+      role: "SYSADMIN"
+      database: "SANDBOX_EARNEDHOURS_SHADOW"
+      warehouse: "COMPUTE_WH_CTX_SCIMDEFAULT"
+      schema: "BRONZE"
+      threads: 8

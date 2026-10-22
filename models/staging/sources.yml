@@ -1,0 +1,22 @@
+version: 2
+
+sources:
+  - name: ctxepicorkinetic
+    database: MATILLION_RAW
+    schema: CRETEX_EPICOR_KINETIC
+    tables:
+      - name: CTXEPICORKINETIC_V_ANALYTICS_COMPANY_ENROLLMENT
+        description: >
+          THE Kinetic enrollment gate. One row per enrolled company with the
+          fiscal period from which its data is valid. Never hardcode a company
+          list anywhere downstream -- join to this model instead (SD-10).
+      - name: ERP_LABORDTL
+        description: Manufacturing labor detail -- the Kinetic fact source.
+      - name: ERP_JOBOPER
+        description: Job operation records -- the only place Kinetic standard hours live.
+      - name: ERP_JOBHEAD
+        description: Job header file.
+      - name: ERP_EMPBASIC
+        description: Employee master.
+      - name: ERP_JCDEPT
+        description: Job costing department master.

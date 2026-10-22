@@ -1,0 +1,63 @@
+version: 2
+
+models:
+  - name: stg_ctxepicorkinetic__company_enrollment
+    description: Kinetic enrollment gate, reused not rebuilt. One row per enrolled company.
+    columns:
+      - name: company_code
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_ctxepicorkinetic__labor_detail
+    description: Kinetic labor detail -- the fact source. Grain = company + labor header + labor detail seqnum.
+    columns:
+      - name: company_code
+        tests:
+          - not_null
+      - name: job_num
+        tests:
+          - not_null
+
+  - name: stg_ctxepicorkinetic__job_operation
+    description: Kinetic job operations -- the only place Kinetic standard hours live.
+    columns:
+      - name: company_code
+        tests:
+          - not_null
+      - name: production_standard_raw
+        tests:
+          - not_null:
+              config:
+                severity: warn
+                where: "standard_format != 'HR'"
+
+  - name: stg_ctxepicorkinetic__job_header
+    description: Kinetic job header.
+    columns:
+      - name: company_code
+        tests:
+          - not_null
+      - name: job_num
+        tests:
+          - not_null
+
+  - name: stg_ctxepicorkinetic__employee
+    description: Kinetic employee master.
+    columns:
+      - name: company_code
+        tests:
+          - not_null
+      - name: emp_id
+        tests:
+          - not_null
+
+  - name: stg_ctxepicorkinetic__department
+    description: Kinetic job-costing department master.
+    columns:
+      - name: company_code
+        tests:
+          - not_null
+      - name: jc_dept
+        tests:
+          - not_null
