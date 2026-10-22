@@ -1,0 +1,16 @@
+version: 2
+
+sources:
+  - name: prd_dw
+    database: PRD_DW
+    schema: DATAMART
+    tables:
+      - name: V_CRETEX_CALENDAR_DATE_DIM
+        description: >
+          The DW's governed fiscal calendar. Reused read-only (SD-18), not rebuilt --
+          matches production's own REF_DATE sourcing decision.
+      - name: T_DIMPART_ALLERPS
+        description: >
+          The DW's conformed part dimension across all ERPs. Reused read-only (SD-18),
+          filtered to our 3 Kinetic companies -- matches production's own REF_PART_DIM
+          sourcing decision.
