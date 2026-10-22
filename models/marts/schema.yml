@@ -1,0 +1,46 @@
+version: 2
+
+models:
+  - name: dim_date
+    description: Fiscal calendar, reused read-only from PRD_DW (SD-18).
+    columns:
+      - name: date_key
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_part
+    description: Conformed part dimension, reused read-only from PRD_DW (SD-18), filtered to our 3 companies.
+    columns:
+      - name: part_dim_key
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_employee
+    description: Conformed employee dimension.
+    columns:
+      - name: employee_key
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_department
+    description: Conformed department dimension. Not joined into fct_labor (SD matches production's own grain).
+    columns:
+      - name: department_key
+        tests:
+          - not_null
+          - unique
+
+  - name: fct_labor
+    description: >
+      The central fact, aggregated to company+job+assembly_seqnum+operation_seqnum --
+      the same grain as CTX_EARNED_HOURS_PRD.GOLD.EARNED_HOURS_JOB_OPERATION.
+    columns:
+      - name: company_code
+        tests:
+          - not_null
+      - name: labor_txns
+        tests:
+          - not_null
