@@ -14,11 +14,22 @@
 --
 -- department is deliberately NOT joined here -- production's own target grain doesn't
 -- carry it either (dim_department exists for future grains, not this one).
+--
+-- earned_hours is sourced from int_labor_standard_hours.operation_earned_hours (SD-19),
+-- NOT summed from labor transactions -- see that model's header for why.
 
 with labor as (
 
     select *
     from {{ ref('int_labor_detail') }}
+
+),
+
+standard_hours as (
+
+    select company_code, job_num, assembly_seqnum, operation_seqnum,
+           operation_earned_hours, quantity_completed
+    from {{ ref('int_labor_standard_hours') }}
 
 ),
 
@@ -52,28 +63,43 @@ labor_with_part as (
         and trim(job_header.part_num)                         = trim(part.part_key)
         and coalesce(trim(job_header.part_revision), '')      = coalesce(trim(part.part_revision), '')
 
+),
+
+aggregated as (
+
+    select
+        company_code,
+        job_num,
+        assembly_seqnum,
+        operation_seqnum,
+        max(part_dim_key)                                               as part_dim_key,
+        max(is_mrp_planning_job)                                        as is_mrp_planning_job,
+
+        count(*)                                                        as labor_txns,
+        count(distinct employee_num)                                    as employees_involved,
+
+        sum(actual_hours)                                               as actual_hours,
+        sum(quantity_produced)                                          as txn_summed_quantity_produced,
+        sum(earned_hours)                                               as txn_summed_earned_hours_crosscheck,
+        sum(case when has_unresolved_standard then 1 else 0 end)        as txns_no_computable_standard,
+
+        min(try_cast(clock_in_date_text as date))                       as first_labor_date,
+        max(try_cast(clock_in_date_text as date))                       as last_labor_date,
+
+        sum(native_earned_hours_crosscheck)                             as native_earned_hours_crosscheck
+
+    from labor_with_part
+    group by company_code, job_num, assembly_seqnum, operation_seqnum
+
 )
 
 select
-    company_code,
-    job_num,
-    assembly_seqnum,
-    operation_seqnum,
-    max(part_dim_key)                                               as part_dim_key,
-    max(is_mrp_planning_job)                                        as is_mrp_planning_job,
-
-    count(*)                                                        as labor_txns,
-    count(distinct employee_num)                                    as employees_involved,
-
-    sum(earned_hours)                                               as earned_hours,
-    sum(actual_hours)                                               as actual_hours,
-    sum(quantity_produced)                                          as quantity_produced,
-    sum(case when has_unresolved_standard then 1 else 0 end)        as txns_no_computable_standard,
-
-    min(try_cast(clock_in_date_text as date))                       as first_labor_date,
-    max(try_cast(clock_in_date_text as date))                       as last_labor_date,
-
-    sum(native_earned_hours_crosscheck)                             as native_earned_hours_crosscheck
-
-from labor_with_part
-group by company_code, job_num, assembly_seqnum, operation_seqnum
+    aggregated.*,
+    standard_hours.operation_earned_hours                               as earned_hours,
+    standard_hours.quantity_completed                                   as quantity_produced
+from aggregated
+left join standard_hours
+    on  aggregated.company_code     = standard_hours.company_code
+    and aggregated.job_num          = standard_hours.job_num
+    and aggregated.assembly_seqnum  = standard_hours.assembly_seqnum
+    and aggregated.operation_seqnum = standard_hours.operation_seqnum
