@@ -22,3 +22,6 @@ models:
     marts:
       +materialized: dynamic_table
       +schema: GOLD
+    reconciliation:
+      +materialized: view
+      +schema: PUBLIC

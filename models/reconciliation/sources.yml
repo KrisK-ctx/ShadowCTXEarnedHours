@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+  - name: ctx_earned_hours_prd
+    database: CTX_EARNED_HOURS_PRD
+    schema: GOLD
+    tables:
+      - name: EARNED_HOURS_JOB_OPERATION
+        description: >
+          The reconciliation target (SD-09: read-only). Production's own job/operation
+          grain earned-hours fact. LOT is always NULL for Kinetic companies -- confirmed
+          against live data -- so the real Kinetic grain is company+job+operation_seqnum.
