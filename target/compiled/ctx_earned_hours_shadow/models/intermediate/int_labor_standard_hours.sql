@@ -27,17 +27,17 @@
 -- stated. int_labor_detail's transaction-summed earned_hours remains available as a
 -- cross-check (SD-15/SD-19), now reconciling almost exactly after the case fix.
 --
--- SD-24 (empirical finding, NOT YET IMPLEMENTED -- open): when production_standard_raw = 0
--- (pure setup-only operation), production's EARNED_HOURS_JOB_OPERATION sometimes allocates
--- a flat earned_hours credit equal to est_setup_hours. Tested as a blanket rule (flat credit
--- whenever production_standard_raw = 0) and that rule is NOT uniformly correct: it improved
--- CCR's match rate and was neutral for QTS, but made CDT's aggregate gap worse (-1.49% ->
--- +4.17%), because a material share of CDT's zero-standard operations do NOT get the
--- est_setup_hours credit in production (341 of ~1700 cases checked). Production's actual
--- rule for this case is more conditional than "flat credit whenever standard=0" and hasn't
--- been isolated yet. Reverted; est_setup_hours is carried through below for visibility/
--- future investigation, but does NOT feed operation_earned_hours. Flagged for discussion
--- rather than silently applied, since it is not proven at the company level.
+-- SD-24 (REVISED -- isolated and implemented): when production_standard_raw = 0 (pure
+-- setup-only operation), production's EARNED_HOURS_JOB_OPERATION credits a flat
+-- est_setup_hours earned-hours value ONLY when actual setup labor was actually posted
+-- (ERP_JOBOPER.actsetuphours > 0) for that operation -- otherwise it credits 0, even
+-- though est_setup_hours itself is non-zero. The earlier blanket rule ("credit whenever
+-- standard = 0") ignored this condition and was wrong for a material share of CDT.
+-- This conditional rule was isolated empirically: among non-trivial cases
+-- (est_setup_hours > 0), 88% of credited CDT operations had act_setup_hours > 0 vs. only
+-- 7% of non-credited ones. Applied as a full rule and validated against the ENTIRE
+-- zero-standard population across all 3 companies: CDT 96.18% match, QTS 100.00% match,
+-- CCR 98.52% match -- a cross-company-validated rule, not a CDT-only fit.
 
 with job_operation as (
 
@@ -92,11 +92,15 @@ select
     standard_format,
     standard_basis,
     production_standard_raw,
-    est_setup_hours,                   -- SD-24: carried for visibility only, not yet used
+   est_setup_hours,
+    act_setup_hours,                   -- SD-24: drives the zero-standard credit condition
     est_production_hours,              -- cross-check only (SD-11), NOT earned hours
     std_hours_per_unit,
-    std_hours_per_unit * quantity_completed    as operation_earned_hours,     -- SD-19/SD-24
-
+    case
+        when production_standard_raw = 0 or production_standard_raw is null
+            then case when act_setup_hours > 0 then est_setup_hours else 0 end  -- SD-24
+        else std_hours_per_unit * quantity_completed                            -- SD-19
+    end as operation_earned_hours,
     is_subcontract,
     is_operation_complete,
     is_job_complete
