@@ -31,7 +31,7 @@
 -- native_earned_hours_crosscheck (Epicor's own EARNEDHRS, carried from Bronze) is kept
 -- for comparison only -- never treated as the reported figure (SD-11).
 --
--- UPDATE (SD-19 REVISED, SD-24 open): this per-transaction earned_hours remains a cross-check
+-- UPDATE (SD-19 REVISED, SD-24 implemented): this per-transaction earned_hours remains a cross-check
 -- column -- Gold's fct_labor sources the authoritative operation-level earned_hours from
 -- int_labor_standard_hours.operation_earned_hours (JobOper.QUANTITY_COMPLETED), not by
 -- summing this column. The original claim that transaction-summing was unreliable due to

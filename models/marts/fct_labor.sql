@@ -18,7 +18,9 @@
 -- earned_hours is sourced from int_labor_standard_hours.operation_earned_hours (SD-19,
 -- revised) -- QUANTITY_COMPLETED-driven -- NOT summed from labor transactions. See that
 -- model's header for the corrected root-cause history (SD-20 retracted, SD-22 case fix,
--- SD-24 open finding on zero-standard setup-only operations).
+-- SD-24 implemented: zero-standard setup-only operations now credit est_setup_hours
+-- only when actual setup labor was posted, validated cross-company (SD-22 case fix,
+-- SD-24 conditional rule).
 
 with labor as (
 
