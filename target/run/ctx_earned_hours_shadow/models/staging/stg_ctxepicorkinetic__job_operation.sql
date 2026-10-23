@@ -14,6 +14,10 @@
 --
 -- SD-22: job_num and operation_code are normalized with upper(trim()) -- see
 -- stg_ctxepicorkinetic__labor_detail for the empirical case-variance finding.
+--
+-- SD-26: setup_pct_complete added -- carries ERP_JOBOPER.SETUPPCTCOMPLETE, needed for the
+-- corrected Setup earned-hours formula (read from production's own documented business
+-- rules, not re-derived). See int_labor_standard_hours for the formula itself.
 
 with source as (
 
@@ -36,6 +40,7 @@ with source as (
         actprodhours            as act_production_hours,
         actsetuphours           as act_setup_hours,
         qtycompleted            as quantity_completed,
+        setuppctcomplete        as setup_pct_complete,
         jobengineered           as is_job_engineered,
         opcomplete              as is_operation_complete,
         jobcomplete             as is_job_complete,

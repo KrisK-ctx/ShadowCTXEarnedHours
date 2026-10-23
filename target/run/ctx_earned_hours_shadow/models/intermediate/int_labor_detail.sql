@@ -13,35 +13,39 @@
             
 
 -- Silver/intermediate: recomputed labor fact at the labor-transaction grain.
--- earned_hours is computed ONLY for direct (Production, non-rework) labor (SD-13) --
--- the reconciliation target (EARNED_HOURS_JOB_OPERATION) is itself "direct labor only",
--- and Epicor's own native rule treats rework as always-zero earned hours. Setup/Indirect
--- get earned_hours = 0 (a real zero, not an unknown) -- Setup's native formula is a
--- running-total calculation across an operation's setup transactions, not reproduced here
--- because it isn't needed for this reconciliation target.
+--
+-- SD-26 (REVISED FOUNDATION): earned_hours is now computed for BOTH Production and Setup
+-- direct labor, per the corrected business rule (see int_labor_standard_hours header) --
+-- NOT just Production as SD-13 assumed. Indirect/Move still earn 0 (a real zero, no
+-- standard applies to them, matching production's own IS_DIRECT_LABOR definition).
+-- Rework still earns 0 at this grain (SD-13's rework exclusion is unaffected by SD-26).
+--
+-- Production (labor_type_pseudo='P', non-rework): earned_hours = quantity_produced *
+-- production_std_hours_per_unit, computed per transaction (transaction grain is correct
+-- -- confirmed directly against production's own SILVER.FACT_LABOR, which is itself a
+-- transaction-grain rollup, not an operation-level QUANTITY_COMPLETED-driven calculation
+-- as SD-19/23 assumed).
+--
+-- Setup (labor_type_pseudo='S', non-rework): earned_hours is NOT computed per transaction
+-- here -- it is a FIXED, OPERATION-level amount (setup_earned_hours_credit, from
+-- int_labor_standard_hours) that must be credited exactly ONCE per operation regardless of
+-- how many Setup labor transactions exist on it. Carrying the per-operation credit through
+-- on every Setup row here (rather than summing it per-transaction) would double/multiply
+-- count it when this table is later aggregated -- exactly the historical defect this rule
+-- corrects for (see int_labor_standard_hours header, job 200013 op 21). fct_labor is
+-- responsible for adding this credit in ONCE per operation (e.g. via MAX(), not SUM()),
+-- not by summing this column across Setup rows.
 --
 -- earned_hours can be LEGITIMATELY NEGATIVE (reversal/correction labor transactions carry
 -- negative quantity_produced -- confirmed against live data: all negative cases trace to
 -- negative quantity_produced with a positive standard rate, never a negative rate) and
 -- LEGITIMATELY NULL for Production rows whose operation standard is unresolved (no
--- matching ERP_JOBOPER row, or an unrecognized standard_format/zero denominator --
--- confirmed 1.2% of Production rows, flagged via has_unresolved_standard below rather
--- than silently defaulted to zero, per "flag bad data, don't silently fix it").
+-- matching ERP_JOBOPER row, or a zero run_quantity denominator -- flagged via
+-- has_unresolved_standard below rather than silently defaulted to zero, per "flag bad
+-- data, don't silently fix it").
 --
 -- native_earned_hours_crosscheck (Epicor's own EARNEDHRS, carried from Bronze) is kept
 -- for comparison only -- never treated as the reported figure (SD-11).
---
--- UPDATE (SD-19 REVISED, SD-24 open): this per-transaction earned_hours remains a cross-check
--- column -- Gold's fct_labor sources the authoritative operation-level earned_hours from
--- int_labor_standard_hours.operation_earned_hours (JobOper.QUANTITY_COMPLETED), not by
--- summing this column. The original claim that transaction-summing was unreliable due to
--- extract incompleteness was WRONG and has been retracted (SD-20 retracted) -- the real
--- cause of the original gap was a case-sensitivity bug in Bronze's joins (SD-22), now
--- fixed. After the case fix, this column's transaction-summed total reconciles with
--- QUANTITY_COMPLETED for 99.3% of operations; the remainder is explained by genuine
--- non-labor-tracked (bulk/backflush) completions, not a defect in this column. It is kept
--- as a cross-check and as the basis for any future employee/department-grain breakdown of
--- earned hours, which the operation-grain figure cannot support.
 
 with labor as (
 
@@ -87,17 +91,21 @@ select
     labor.fiscal_period,
     job_header.is_mrp_planning_job,
 
-    standard_hours.std_hours_per_unit,
-    standard_hours.standard_format,
+    standard_hours.production_std_hours_per_unit,
+    case
+        when labor.labor_type_code = 'S' and not labor.is_rework
+            then standard_hours.setup_earned_hours_credit
+        else null
+    end as setup_earned_hours_credit,                                                  -- SD-26: only exposed on Setup rows, so fct_labor's MAX() naturally scopes the credit to operations with a real Setup transaction -- not every operation that happens to have a populated est_setup_hours
 
     case
-        when labor.labor_type_pseudo = 'P' and not labor.is_rework
-            then labor.quantity_produced * standard_hours.std_hours_per_unit
+        when labor.labor_type_code = 'P' and not labor.is_rework
+            then labor.quantity_produced * standard_hours.production_std_hours_per_unit
         else 0
-    end as earned_hours,
+    end as earned_hours,                                                             -- SD-26
 
-    (labor.labor_type_pseudo = 'P' and not labor.is_rework
-        and standard_hours.std_hours_per_unit is null) as has_unresolved_standard,
+    (labor.labor_type_code = 'P' and not labor.is_rework
+        and standard_hours.production_std_hours_per_unit is null) as has_unresolved_standard,
 
     labor.native_earned_hours_crosscheck
 

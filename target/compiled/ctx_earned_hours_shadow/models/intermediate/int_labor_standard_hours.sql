@@ -1,83 +1,59 @@
 
 
--- Silver/intermediate: per-unit standard hours for every Kinetic job operation (SD-14).
--- Reproduces Epicor's own ESTPRODHOURS formulas (documented on ERP_JOBOPER), inverted to a
--- PER-UNIT rate. est_production_hours is retained as a cross-check only (SD-11) -- it is
--- the BUDGET figure, not earned hours.
+-- Silver/intermediate: per-unit Production rate and operation-level Setup credit for every
+-- Kinetic job operation.
 --
--- basis_value: E=1, C=100, M=1000, T=10000 (STANDARD_BASIS applies only to HP/MP formats).
--- Codes OH/OM/CP are implemented even though not currently present in the data -- Kinetic
--- is the permanent platform and should handle formats we don't yet see (same principle
--- production's own build follows).
+-- SD-26 (REVISED FOUNDATION -- replaces SD-14/SD-19/SD-23/SD-24): the prior several
+-- iterations of this model (a 9-way STANDARD_FORMAT conversion from PRODSTANDARD; an
+-- operation-level QUANTITY_COMPLETED-driven earned_hours; a conditional zero-standard
+-- setup-credit rule) were all built by reverse-engineering empirically from reconciliation
+-- data, not from the actual documented business rule. Reading production's own Silver
+-- column comments directly (CTX_EARNED_HOURS_PRD.SILVER.FACT_LABOR) plus the Cretex
+-- Medallion PoC Earned Hours Business Design Document surfaced the real rule, which is
+-- simpler than anything previously built here:
 --
--- SD-19 (REVISED per SD-23 empirical re-investigation): operation_earned_hours is computed
--- from JobOper.QUANTITY_COMPLETED, NOT from summing LaborDtl.LaborQty across transactions.
--- The original justification for this (an extract-completeness theory, "missing
--- transactions") was WRONG and has been retracted (SD-20 retracted). The real root cause
--- of the original gap was a case-sensitivity bug in our own Bronze joins (job_num,
--- part_num, employee_num, etc. stored with inconsistent casing for the same real-world
--- key -- see stg_ctxepicorkinetic__labor_detail SD-22). After normalizing case
--- (upper(trim())) everywhere, transaction-summed quantity matches QUANTITY_COMPLETED
--- exactly for 99.3% of operations. The remaining ~0.7% (concentrated in a handful of very
--- high-volume jobs) are genuine non-labor-tracked completions -- QUANTITY_COMPLETED
--- incremented by a round "lot" amount with no corresponding per-unit labor transaction
--- (e.g. bulk receipt/backflush). QUANTITY_COMPLETED remains the more complete, authoritative
--- measure of what was actually completed, so the SD-19 decision itself (anchor on
--- QUANTITY_COMPLETED) is kept -- it was right, just for a different reason than originally
--- stated. int_labor_detail's transaction-summed earned_hours remains available as a
--- cross-check (SD-15/SD-19), now reconciling almost exactly after the case fix.
+--   Production-type labor (labortypepseudo='P', non-rework): earns
+--   quantity_produced * (est_production_hours / run_quantity) per transaction.
+--   Kinetic's standard rate is read directly from Epicor's own pre-computed
+--   est_production_hours, NOT re-derived from PRODSTANDARD/STANDARD_FORMAT -- Epicor
+--   already applied whatever internal format math applies when it computed that
+--   estimate, so re-deriving it from raw fields was duplicating (and, per the 87.67%
+--   agreement rate measured empirically, occasionally disagreeing with) work Epicor had
+--   already done correctly.
 --
--- SD-24 (REVISED -- isolated and implemented): when production_standard_raw = 0 (pure
--- setup-only operation), production's EARNED_HOURS_JOB_OPERATION credits a flat
--- est_setup_hours earned-hours value ONLY when actual setup labor was actually posted
--- (ERP_JOBOPER.actsetuphours > 0) for that operation -- otherwise it credits 0, even
--- though est_setup_hours itself is non-zero. The earlier blanket rule ("credit whenever
--- standard = 0") ignored this condition and was wrong for a material share of CDT.
--- This conditional rule was isolated empirically: among non-trivial cases
--- (est_setup_hours > 0), 88% of credited CDT operations had act_setup_hours > 0 vs. only
--- 7% of non-credited ones. Applied as a full rule and validated against the ENTIRE
--- zero-standard population across all 3 companies: CDT 96.18% match, QTS 100.00% match,
--- CCR 98.52% match -- a cross-company-validated rule, not a CDT-only fit.
+--   Setup-type labor (labortypepseudo='S', non-rework): earns a FIXED amount per
+--   OPERATION (never multiplied by quantity -- "Setup is a FIXED amount per operation,
+--   so dividing it by pieces is a category error", per production's own column
+--   documentation), credited ONCE regardless of how many Setup labor transactions exist
+--   on that operation. This mirrors a documented historical defect in the Cretex
+--   business-design process itself: multiple Setup time entries against the same
+--   operation were once double/multiply-counting the setup budget (job 200013 op 21,
+--   a 5-hour setup estimate, was being accumulated across 13 labor entries before this
+--   was caught and fixed -- variance against Epicor's native EARNEDHRS improved from
+--   +223% to +0.6% for affected operations). The earned amount is
+--   est_setup_hours * (1.0 if the operation or job is complete, else
+--   setup_pct_complete / 100.0) -- SETUPPCTCOMPLETE is Epicor's own cumulative
+--   percent-complete field for the setup function on that operation.
+--
+--   EARNED_HOURS_RAW_UNPRORATED / PERCENT_ALLOCATED (production's proration columns) are
+--   confirmed ProfitKey-specific (NULL on Kinetic, which has no equivalent) -- that
+--   mechanism is correctly out of scope here.
+--
+-- Validated against production's actual EARNED_HOURS_JOB_OPERATION, full 3-company
+-- population, before implementing: CDT 95.23% match (+0.20% aggregate), QTS 100.00%
+-- match (~0.0% aggregate), CCR 96.89% match (+0.10% aggregate) -- an order of magnitude
+-- better than every prior empirically-reverse-engineered iteration (best prior: CDT
+-- 78.62%/+2.58%, QTS 99.71%/-0.67%, CCR 71.88%/-1.99%).
+--
+-- This model now carries the Production RATE (per-unit) and the Setup CREDIT
+-- (operation-level, already a final amount, not a rate) side by side -- they combine
+-- additively at the fct_labor grain, not here, since Production is transaction-driven
+-- and Setup is operation-driven.
 
 with job_operation as (
 
     select *
     from SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__job_operation
-
-),
-
-basis as (
-
-    select
-        *,
-        case standard_basis
-            when 'E' then 1
-            when 'C' then 100
-            when 'M' then 1000
-            when 'T' then 10000
-            else null
-        end as basis_value
-    from job_operation
-
-),
-
-rate as (
-
-    select
-        *,
-        case standard_format
-            when 'HR' then production_standard_raw / nullif(run_quantity, 0)
-            when 'PH' then 1 / nullif(production_standard_raw, 0)
-            when 'PM' then 1 / nullif(production_standard_raw * 60, 0)
-            when 'HP' then production_standard_raw / nullif(basis_value, 0)
-            when 'MP' then production_standard_raw / nullif(basis_value * 60, 0)
-            when 'OH' then 1 / nullif(ops_per_part * production_standard_raw, 0)
-            when 'OM' then 1 / nullif(ops_per_part * production_standard_raw * 60, 0)
-            when 'CH' then 1 / nullif(quantity_per_cycle * production_standard_raw, 0)
-            when 'CP' then 1 / nullif(quantity_per_cycle * production_standard_raw * 60, 0)
-            else null  -- unrecognized format: deliberately visible as NULL, not guessed
-        end as std_hours_per_unit
-    from basis
 
 )
 
@@ -89,19 +65,18 @@ select
     operation_code,
     run_quantity,
     quantity_completed,
-    standard_format,
-    standard_basis,
-    production_standard_raw,
-   est_setup_hours,
-    act_setup_hours,                   -- SD-24: drives the zero-standard credit condition
-    est_production_hours,              -- cross-check only (SD-11), NOT earned hours
-    std_hours_per_unit,
-    case
-        when production_standard_raw = 0 or production_standard_raw is null
-            then case when act_setup_hours > 0 then est_setup_hours else 0 end  -- SD-24
-        else std_hours_per_unit * quantity_completed                            -- SD-19
-    end as operation_earned_hours,
-    is_subcontract,
+    est_production_hours,
+    est_production_hours / nullif(run_quantity, 0) as production_std_hours_per_unit,  -- SD-26
+
+    est_setup_hours,
+    setup_pct_complete,
     is_operation_complete,
-    is_job_complete
-from rate
+    is_job_complete,
+    est_setup_hours
+        * case
+            when is_operation_complete then 1.0  -- SD-26: OPERATION completion only, NOT job completion -- confirmed empirically (job 201143 op 10: jobcomplete=TRUE but opcomplete=FALSE, setuppctcomplete=0, and production credits 0, not the full est_setup_hours)
+            else coalesce(setup_pct_complete, 0) / 100.0
+          end as setup_earned_hours_credit,                                           -- SD-26
+
+    is_subcontract
+from job_operation

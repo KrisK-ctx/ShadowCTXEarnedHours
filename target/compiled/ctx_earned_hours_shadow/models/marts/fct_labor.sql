@@ -8,10 +8,16 @@
 -- department is deliberately NOT joined here -- production's own target grain doesn't
 -- carry it either (dim_department exists for future grains, not this one).
 --
--- earned_hours is sourced from int_labor_standard_hours.operation_earned_hours (SD-19,
--- revised) -- QUANTITY_COMPLETED-driven -- NOT summed from labor transactions. See that
--- model's header for the corrected root-cause history (SD-20 retracted, SD-22 case fix,
--- SD-24 open finding on zero-standard setup-only operations).
+-- earned_hours is now the sum of two components (SD-26, replaces SD-19/SD-23/SD-24):
+-- (1) Production labor's per-transaction earned_hours, summed normally (transaction grain
+--     is correct, confirmed against production's own SILVER.FACT_LABOR); and
+-- (2) Setup's operation-level credit, added in ONCE via MAX() -- never SUM() -- since it is
+--     a fixed per-operation amount, not a per-transaction one. Summing it would
+--     double/multiply-count it across however many Setup labor transactions exist on the
+--     operation, which is the exact historical defect this rule corrects for (see
+--     int_labor_standard_hours header). See that model's header for the corrected
+--     root-cause history and the empirical validation (CDT 95.23%, QTS 100.00%, CCR
+--     96.89% match against production, all 3 companies).
 
 with labor as (
 
@@ -22,8 +28,7 @@ with labor as (
 
 standard_hours as (
 
-    select company_code, job_num, assembly_seqnum, operation_seqnum,
-           operation_earned_hours, quantity_completed
+    select company_code, job_num, assembly_seqnum, operation_seqnum, quantity_completed
     from SANDBOX_EARNEDHOURS_SHADOW.SILVER.int_labor_standard_hours
 
 ),
@@ -75,7 +80,8 @@ aggregated as (
 
         sum(actual_hours)                                               as actual_hours,
         sum(quantity_produced)                                          as txn_summed_quantity_produced,
-        sum(earned_hours)                                               as txn_summed_earned_hours_crosscheck,
+        sum(earned_hours)                                               as production_earned_hours,        -- SD-26
+        max(setup_earned_hours_credit)                                  as setup_earned_hours,              -- SD-26: MAX, not SUM
         sum(case when has_unresolved_standard then 1 else 0 end)        as txns_no_computable_standard,
 
         min(try_cast(clock_in_date_text as date))                       as first_labor_date,
@@ -90,7 +96,7 @@ aggregated as (
 
 select
     aggregated.*,
-    standard_hours.operation_earned_hours                               as earned_hours,
+    coalesce(aggregated.production_earned_hours, 0) + coalesce(aggregated.setup_earned_hours, 0) as earned_hours,  -- SD-26
     standard_hours.quantity_completed                                   as quantity_produced
 from aggregated
 left join standard_hours
