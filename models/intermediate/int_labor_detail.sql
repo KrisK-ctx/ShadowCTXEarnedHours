@@ -26,14 +26,17 @@
 -- native_earned_hours_crosscheck (Epicor's own EARNEDHRS, carried from Bronze) is kept
 -- for comparison only -- never treated as the reported figure (SD-11).
 --
--- UPDATE (SD-19, reconciliation finding): this per-transaction earned_hours is now a
--- DIAGNOSTIC/cross-check column only -- Gold's fct_labor sources the authoritative
--- operation-level earned_hours from int_labor_standard_hours.operation_earned_hours
--- (JobOper.QUANTITY_COMPLETED), not by summing this column. Reconciliation against
--- production confirmed the summed-transaction approach under/over-counts: the current
--- MATILLION_RAW extract doesn't contain full labor history, and reversal transactions
--- introduce sign-flip noise, both of which QUANTITY_COMPLETED (Epicor's own running
--- total) is immune to. This column stays -- it's exactly what exposed the bug.
+-- UPDATE (SD-19 REVISED, SD-24 open): this per-transaction earned_hours remains a cross-check
+-- column -- Gold's fct_labor sources the authoritative operation-level earned_hours from
+-- int_labor_standard_hours.operation_earned_hours (JobOper.QUANTITY_COMPLETED), not by
+-- summing this column. The original claim that transaction-summing was unreliable due to
+-- extract incompleteness was WRONG and has been retracted (SD-20 retracted) -- the real
+-- cause of the original gap was a case-sensitivity bug in Bronze's joins (SD-22), now
+-- fixed. After the case fix, this column's transaction-summed total reconciles with
+-- QUANTITY_COMPLETED for 99.3% of operations; the remainder is explained by genuine
+-- non-labor-tracked (bulk/backflush) completions, not a defect in this column. It is kept
+-- as a cross-check and as the basis for any future employee/department-grain breakdown of
+-- earned hours, which the operation-grain figure cannot support.
 
 with labor as (
 

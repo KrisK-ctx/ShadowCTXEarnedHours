@@ -2,12 +2,15 @@
 
 -- Bronze: Kinetic job-costing department master. Thin rename only.
 -- Gated by the enrollment view (SD-10).
+--
+-- SD-22: jc_dept is normalized with upper(trim()) defensively, for join consistency
+-- with the other models' jc_dept -- confirmed 0 case variance in this table itself.
 
 with source as (
 
     select
         company                 as company_code,
-        jcdept                  as jc_dept,
+        upper(trim(jcdept))     as jc_dept,
         description             as department_description,
         globaljcdept            as is_global_jc_dept,
         sysrevid                as _sysrevid

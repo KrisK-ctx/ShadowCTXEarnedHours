@@ -17,14 +17,34 @@
 -- is the permanent platform and should handle formats we don't yet see (same principle
 -- production's own build follows).
 --
--- SD-19 (reconciliation finding): operation_earned_hours is computed from
--- JobOper.QUANTITY_COMPLETED, NOT from summing LaborDtl.LaborQty across transactions.
--- Confirmed via reconciliation against production on 3 independent CDT examples (all
--- exact matches both directions): our transaction-summed quantity is vulnerable to (a)
--- the current MATILLION_RAW extract not containing full labor history (QTYCOMPLETED is
--- Epicor's own authoritative running total, unaffected by extract completeness) and (b)
--- sign-flip noise from reversal/correction transactions. QUANTITY_COMPLETED is already
--- scoped to Production/non-rework by Epicor's own field definition, consistent with SD-13.
+-- SD-19 (REVISED per SD-23 empirical re-investigation): operation_earned_hours is computed
+-- from JobOper.QUANTITY_COMPLETED, NOT from summing LaborDtl.LaborQty across transactions.
+-- The original justification for this (an extract-completeness theory, "missing
+-- transactions") was WRONG and has been retracted (SD-20 retracted). The real root cause
+-- of the original gap was a case-sensitivity bug in our own Bronze joins (job_num,
+-- part_num, employee_num, etc. stored with inconsistent casing for the same real-world
+-- key -- see stg_ctxepicorkinetic__labor_detail SD-22). After normalizing case
+-- (upper(trim())) everywhere, transaction-summed quantity matches QUANTITY_COMPLETED
+-- exactly for 99.3% of operations. The remaining ~0.7% (concentrated in a handful of very
+-- high-volume jobs) are genuine non-labor-tracked completions -- QUANTITY_COMPLETED
+-- incremented by a round "lot" amount with no corresponding per-unit labor transaction
+-- (e.g. bulk receipt/backflush). QUANTITY_COMPLETED remains the more complete, authoritative
+-- measure of what was actually completed, so the SD-19 decision itself (anchor on
+-- QUANTITY_COMPLETED) is kept -- it was right, just for a different reason than originally
+-- stated. int_labor_detail's transaction-summed earned_hours remains available as a
+-- cross-check (SD-15/SD-19), now reconciling almost exactly after the case fix.
+--
+-- SD-24 (empirical finding, NOT YET IMPLEMENTED -- open): when production_standard_raw = 0
+-- (pure setup-only operation), production's EARNED_HOURS_JOB_OPERATION sometimes allocates
+-- a flat earned_hours credit equal to est_setup_hours. Tested as a blanket rule (flat credit
+-- whenever production_standard_raw = 0) and that rule is NOT uniformly correct: it improved
+-- CCR's match rate and was neutral for QTS, but made CDT's aggregate gap worse (-1.49% ->
+-- +4.17%), because a material share of CDT's zero-standard operations do NOT get the
+-- est_setup_hours credit in production (341 of ~1700 cases checked). Production's actual
+-- rule for this case is more conditional than "flat credit whenever standard=0" and hasn't
+-- been isolated yet. Reverted; est_setup_hours is carried through below for visibility/
+-- future investigation, but does NOT feed operation_earned_hours. Flagged for discussion
+-- rather than silently applied, since it is not proven at the company level.
 
 with job_operation as (
 
@@ -79,9 +99,10 @@ select
     standard_format,
     standard_basis,
     production_standard_raw,
+    est_setup_hours,                   -- SD-24: carried for visibility only, not yet used
     est_production_hours,              -- cross-check only (SD-11), NOT earned hours
     std_hours_per_unit,
-    std_hours_per_unit * quantity_completed    as operation_earned_hours,     -- SD-19
+    std_hours_per_unit * quantity_completed    as operation_earned_hours,     -- SD-19/SD-24
 
     is_subcontract,
     is_operation_complete,

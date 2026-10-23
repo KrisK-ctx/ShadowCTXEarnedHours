@@ -20,8 +20,10 @@
 -- department is deliberately NOT joined here -- production's own target grain doesn't
 -- carry it either (dim_department exists for future grains, not this one).
 --
--- earned_hours is sourced from int_labor_standard_hours.operation_earned_hours (SD-19),
--- NOT summed from labor transactions -- see that model's header for why.
+-- earned_hours is sourced from int_labor_standard_hours.operation_earned_hours (SD-19,
+-- revised) -- QUANTITY_COMPLETED-driven -- NOT summed from labor transactions. See that
+-- model's header for the corrected root-cause history (SD-20 retracted, SD-22 case fix,
+-- SD-24 open finding on zero-standard setup-only operations).
 
 with labor as (
 
@@ -64,9 +66,9 @@ labor_with_part as (
         on  labor.company_code = job_header.company_code
         and labor.job_num      = job_header.job_num
     left join part
-        on  job_header.company_code                          = part.company_id
-        and trim(job_header.part_num)                         = trim(part.part_key)
-        and coalesce(trim(job_header.part_revision), '')      = coalesce(trim(part.part_revision), '')
+        on  job_header.company_code                                     = part.company_id
+        and job_header.part_num                                         = upper(trim(part.part_key))
+        and coalesce(job_header.part_revision, '')                      = coalesce(upper(trim(part.part_revision)), '')
 
 ),
 
