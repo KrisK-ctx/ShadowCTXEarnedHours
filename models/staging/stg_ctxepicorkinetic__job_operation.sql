@@ -9,15 +9,18 @@
 -- standards (est_production_hours = budget, NOT earned hours; production_standard_raw +
 -- standard_format = the per-unit rate Silver must convert and multiply by quantity
 -- produced -- SD-11). No conversion happens here; that is Silver's job.
+--
+-- SD-22: job_num and operation_code are normalized with upper(trim()) -- see
+-- stg_ctxepicorkinetic__labor_detail for the empirical case-variance finding.
 
 with source as (
 
     select
         company                 as company_code,
-        trim(jobnum)            as job_num,
+        upper(trim(jobnum))     as job_num,
         assemblyseq             as assembly_seqnum,
         oprseq                  as operation_seqnum,
-        opcode                  as operation_code,
+        upper(trim(opcode))     as operation_code,
         subcontract             as is_subcontract,
         runqty                  as run_quantity,
         estsethours             as est_setup_hours,

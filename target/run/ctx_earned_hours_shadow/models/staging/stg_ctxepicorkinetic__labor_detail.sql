@@ -12,6 +12,11 @@
 -- NOT treated as authoritative earned hours (SD-11). The real derivation happens in
 -- int_labor_standard_hours (Silver), from the operation's per-unit standard x quantity
 -- produced. This column exists here only so Silver can cross-check against it later.
+--
+-- SD-22: job_num, employee_num, resource_group_key, operation_code are normalized with
+-- upper(trim()) -- the same real-world key is stored with inconsistent casing across rows
+-- in the raw source (confirmed empirically, e.g. 'BPQ45915' vs 'bpq45915'). Case-sensitive
+-- joins on these columns silently drop matched rows. See PROJECT_LOG.md SD-22/SD-23.
 
 with source as (
 
@@ -19,16 +24,16 @@ with source as (
         company                 as company_code,
         laborhedseq             as labor_header_seqnum,
         labordtlseq             as labor_detail_seqnum,
-        employeenum             as employee_num,
+        upper(trim(employeenum)) as employee_num,
         labortype               as labor_type_code,
         labortypepseudo         as labor_type_pseudo,
         rework                  as is_rework,
-        trim(jobnum)            as job_num,
+        upper(trim(jobnum))     as job_num,
         assemblyseq             as assembly_seqnum,
         oprseq                  as operation_seqnum,
-        opcode                  as operation_code,
-        jcdept                  as jc_dept,
-        resourcegrpid           as resource_group_key,
+        upper(trim(opcode))     as operation_code,
+        upper(trim(jcdept))      as jc_dept,
+        upper(trim(resourcegrpid)) as resource_group_key,
         laborhrs                as actual_hours,
         burdenhrs               as burden_hours,
         laborqty                as quantity_produced,

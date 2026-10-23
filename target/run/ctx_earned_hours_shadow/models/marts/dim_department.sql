@@ -2,7 +2,7 @@
         
 
     
-        create dynamic table SANDBOX_EARNEDHOURS_SHADOW.GOLD.dim_department
+        create or replace dynamic table SANDBOX_EARNEDHOURS_SHADOW.GOLD.dim_department
         target_lag = '1 hour'
         warehouse = COMPUTE_WH_CTX_SCIMDEFAULT
         refresh_mode = INCREMENTAL
