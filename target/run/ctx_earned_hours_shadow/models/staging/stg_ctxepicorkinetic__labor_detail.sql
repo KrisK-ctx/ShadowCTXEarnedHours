@@ -1,68 +1,42 @@
-
+-- back compat for old kwarg name
   
+  begin;
+    
+        
+            
+                
+                
+            
+                
+                
+            
+                
+                
+            
+        
     
 
-        create or replace transient table SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__labor_detail
-         as
-        (
+    
 
--- Bronze: Kinetic labor detail -- the Kinetic fact source.
--- Thin rename only, no business logic. Gated by the enrollment view (SD-10), not a
--- hardcoded company list. Carries Epicor's native EARNEDHRS through as a plain column --
--- NOT treated as authoritative earned hours (SD-11). The real derivation happens in
--- int_labor_standard_hours (Silver), from the operation's per-unit standard x quantity
--- produced. This column exists here only so Silver can cross-check against it later.
---
--- SD-22: job_num, employee_num, resource_group_key, operation_code are normalized with
--- upper(trim()) -- the same real-world key is stored with inconsistent casing across rows
--- in the raw source (confirmed empirically, e.g. 'BPQ45915' vs 'bpq45915'). Case-sensitive
--- joins on these columns silently drop matched rows. See PROJECT_LOG.md SD-22/SD-23.
+    merge into SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__labor_detail as DBT_INTERNAL_DEST
+        using SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__labor_detail__dbt_tmp as DBT_INTERNAL_SOURCE
+        on (
+                    DBT_INTERNAL_SOURCE.company_code = DBT_INTERNAL_DEST.company_code
+                ) and (
+                    DBT_INTERNAL_SOURCE.labor_header_seqnum = DBT_INTERNAL_DEST.labor_header_seqnum
+                ) and (
+                    DBT_INTERNAL_SOURCE.labor_detail_seqnum = DBT_INTERNAL_DEST.labor_detail_seqnum
+                )
 
-with source as (
+    
+    when matched then update set
+        "COMPANY_CODE" = DBT_INTERNAL_SOURCE."COMPANY_CODE","LABOR_HEADER_SEQNUM" = DBT_INTERNAL_SOURCE."LABOR_HEADER_SEQNUM","LABOR_DETAIL_SEQNUM" = DBT_INTERNAL_SOURCE."LABOR_DETAIL_SEQNUM","EMPLOYEE_NUM" = DBT_INTERNAL_SOURCE."EMPLOYEE_NUM","LABOR_TYPE_CODE" = DBT_INTERNAL_SOURCE."LABOR_TYPE_CODE","LABOR_TYPE_PSEUDO" = DBT_INTERNAL_SOURCE."LABOR_TYPE_PSEUDO","IS_REWORK" = DBT_INTERNAL_SOURCE."IS_REWORK","JOB_NUM" = DBT_INTERNAL_SOURCE."JOB_NUM","ASSEMBLY_SEQNUM" = DBT_INTERNAL_SOURCE."ASSEMBLY_SEQNUM","OPERATION_SEQNUM" = DBT_INTERNAL_SOURCE."OPERATION_SEQNUM","OPERATION_CODE" = DBT_INTERNAL_SOURCE."OPERATION_CODE","JC_DEPT" = DBT_INTERNAL_SOURCE."JC_DEPT","RESOURCE_GROUP_KEY" = DBT_INTERNAL_SOURCE."RESOURCE_GROUP_KEY","ACTUAL_HOURS" = DBT_INTERNAL_SOURCE."ACTUAL_HOURS","BURDEN_HOURS" = DBT_INTERNAL_SOURCE."BURDEN_HOURS","QUANTITY_PRODUCED" = DBT_INTERNAL_SOURCE."QUANTITY_PRODUCED","QUANTITY_SCRAPPED" = DBT_INTERNAL_SOURCE."QUANTITY_SCRAPPED","NATIVE_EARNED_HOURS_CROSSCHECK" = DBT_INTERNAL_SOURCE."NATIVE_EARNED_HOURS_CROSSCHECK","IS_COMPLETE" = DBT_INTERNAL_SOURCE."IS_COMPLETE","IS_OPERATION_COMPLETE" = DBT_INTERNAL_SOURCE."IS_OPERATION_COMPLETE","CLOCK_IN_DATE_TEXT" = DBT_INTERNAL_SOURCE."CLOCK_IN_DATE_TEXT","PAYROLL_DATE_TEXT" = DBT_INTERNAL_SOURCE."PAYROLL_DATE_TEXT","FISCAL_YEAR" = DBT_INTERNAL_SOURCE."FISCAL_YEAR","FISCAL_PERIOD" = DBT_INTERNAL_SOURCE."FISCAL_PERIOD","IS_POSTED_TO_GL" = DBT_INTERNAL_SOURCE."IS_POSTED_TO_GL","IS_WIP_POSTED" = DBT_INTERNAL_SOURCE."IS_WIP_POSTED","LABOR_RATE" = DBT_INTERNAL_SOURCE."LABOR_RATE","BURDEN_RATE" = DBT_INTERNAL_SOURCE."BURDEN_RATE","_SYSREVID" = DBT_INTERNAL_SOURCE."_SYSREVID","_LOADED_AT" = DBT_INTERNAL_SOURCE."_LOADED_AT"
+    
 
-    select
-        company                 as company_code,
-        laborhedseq             as labor_header_seqnum,
-        labordtlseq             as labor_detail_seqnum,
-        upper(trim(employeenum)) as employee_num,
-        labortype               as labor_type_code,
-        labortypepseudo         as labor_type_pseudo,
-        rework                  as is_rework,
-        upper(trim(jobnum))     as job_num,
-        assemblyseq             as assembly_seqnum,
-        oprseq                  as operation_seqnum,
-        upper(trim(opcode))     as operation_code,
-        upper(trim(jcdept))      as jc_dept,
-        upper(trim(resourcegrpid)) as resource_group_key,
-        laborhrs                as actual_hours,
-        burdenhrs               as burden_hours,
-        laborqty                as quantity_produced,
-        scrapqty                as quantity_scrapped,
-        earnedhrs               as native_earned_hours_crosscheck,
-        complete                as is_complete,
-        opcomplete              as is_operation_complete,
-        clockindate             as clock_in_date_text,
-        payrolldate             as payroll_date_text,
-        fiscalyear              as fiscal_year,
-        fiscalperiod            as fiscal_period,
-        postedtogl              as is_posted_to_gl,
-        wipposted               as is_wip_posted,
-        laborrate               as labor_rate,
-        burdenrate              as burden_rate,
-        sysrevid                as _sysrevid
-    from MATILLION_RAW.CRETEX_EPICOR_KINETIC.ERP_LABORDTL
+    when not matched then insert
+        ("COMPANY_CODE", "LABOR_HEADER_SEQNUM", "LABOR_DETAIL_SEQNUM", "EMPLOYEE_NUM", "LABOR_TYPE_CODE", "LABOR_TYPE_PSEUDO", "IS_REWORK", "JOB_NUM", "ASSEMBLY_SEQNUM", "OPERATION_SEQNUM", "OPERATION_CODE", "JC_DEPT", "RESOURCE_GROUP_KEY", "ACTUAL_HOURS", "BURDEN_HOURS", "QUANTITY_PRODUCED", "QUANTITY_SCRAPPED", "NATIVE_EARNED_HOURS_CROSSCHECK", "IS_COMPLETE", "IS_OPERATION_COMPLETE", "CLOCK_IN_DATE_TEXT", "PAYROLL_DATE_TEXT", "FISCAL_YEAR", "FISCAL_PERIOD", "IS_POSTED_TO_GL", "IS_WIP_POSTED", "LABOR_RATE", "BURDEN_RATE", "_SYSREVID", "_LOADED_AT")
+    values
+        ("COMPANY_CODE", "LABOR_HEADER_SEQNUM", "LABOR_DETAIL_SEQNUM", "EMPLOYEE_NUM", "LABOR_TYPE_CODE", "LABOR_TYPE_PSEUDO", "IS_REWORK", "JOB_NUM", "ASSEMBLY_SEQNUM", "OPERATION_SEQNUM", "OPERATION_CODE", "JC_DEPT", "RESOURCE_GROUP_KEY", "ACTUAL_HOURS", "BURDEN_HOURS", "QUANTITY_PRODUCED", "QUANTITY_SCRAPPED", "NATIVE_EARNED_HOURS_CROSSCHECK", "IS_COMPLETE", "IS_OPERATION_COMPLETE", "CLOCK_IN_DATE_TEXT", "PAYROLL_DATE_TEXT", "FISCAL_YEAR", "FISCAL_PERIOD", "IS_POSTED_TO_GL", "IS_WIP_POSTED", "LABOR_RATE", "BURDEN_RATE", "_SYSREVID", "_LOADED_AT")
 
-)
-
--- No is_incremental() filter: the source is a full flush-and-fill snapshot (SD-03), so
--- every run re-presents the full filtered set and the merge's unique_key does the
--- row-level insert/update. This does not handle source-side deletes -- acceptable for
--- now, revisit if that becomes material.
-
-select source.*, current_timestamp() as _loaded_at
-from source
-inner join SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__company_enrollment as gate
-    on source.company_code = gate.company_code
-        );
-      
-  
+;
+    commit;

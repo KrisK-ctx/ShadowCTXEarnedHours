@@ -1,59 +1,47 @@
-
+-- back compat for old kwarg name
   
+  begin;
+    
+        
+            
+                
+                
+            
+                
+                
+            
+                
+                
+            
+                
+                
+            
+        
     
 
-        create or replace transient table SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__job_operation
-         as
-        (
+    
 
--- Bronze: Kinetic job operations -- the only place Kinetic standard hours live.
--- Thin rename only. Gated by the enrollment view (SD-10). Carries BOTH candidate
--- standards (est_production_hours = budget, NOT earned hours; production_standard_raw +
--- standard_format = the per-unit rate Silver must convert and multiply by quantity
--- produced -- SD-11). No conversion happens here; that is Silver's job.
---
--- SD-22: job_num and operation_code are normalized with upper(trim()) -- see
--- stg_ctxepicorkinetic__labor_detail for the empirical case-variance finding.
---
--- SD-26: setup_pct_complete added -- carries ERP_JOBOPER.SETUPPCTCOMPLETE, needed for the
--- corrected Setup earned-hours formula (read from production's own documented business
--- rules, not re-derived). See int_labor_standard_hours for the formula itself.
+    merge into SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__job_operation as DBT_INTERNAL_DEST
+        using SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__job_operation__dbt_tmp as DBT_INTERNAL_SOURCE
+        on (
+                    DBT_INTERNAL_SOURCE.company_code = DBT_INTERNAL_DEST.company_code
+                ) and (
+                    DBT_INTERNAL_SOURCE.job_num = DBT_INTERNAL_DEST.job_num
+                ) and (
+                    DBT_INTERNAL_SOURCE.assembly_seqnum = DBT_INTERNAL_DEST.assembly_seqnum
+                ) and (
+                    DBT_INTERNAL_SOURCE.operation_seqnum = DBT_INTERNAL_DEST.operation_seqnum
+                )
 
-with source as (
+    
+    when matched then update set
+        "COMPANY_CODE" = DBT_INTERNAL_SOURCE."COMPANY_CODE","JOB_NUM" = DBT_INTERNAL_SOURCE."JOB_NUM","ASSEMBLY_SEQNUM" = DBT_INTERNAL_SOURCE."ASSEMBLY_SEQNUM","OPERATION_SEQNUM" = DBT_INTERNAL_SOURCE."OPERATION_SEQNUM","OPERATION_CODE" = DBT_INTERNAL_SOURCE."OPERATION_CODE","IS_SUBCONTRACT" = DBT_INTERNAL_SOURCE."IS_SUBCONTRACT","RUN_QUANTITY" = DBT_INTERNAL_SOURCE."RUN_QUANTITY","EST_SETUP_HOURS" = DBT_INTERNAL_SOURCE."EST_SETUP_HOURS","EST_PRODUCTION_HOURS" = DBT_INTERNAL_SOURCE."EST_PRODUCTION_HOURS","PRODUCTION_STANDARD_RAW" = DBT_INTERNAL_SOURCE."PRODUCTION_STANDARD_RAW","STANDARD_FORMAT" = DBT_INTERNAL_SOURCE."STANDARD_FORMAT","STANDARD_BASIS" = DBT_INTERNAL_SOURCE."STANDARD_BASIS","OPS_PER_PART" = DBT_INTERNAL_SOURCE."OPS_PER_PART","QUANTITY_PER" = DBT_INTERNAL_SOURCE."QUANTITY_PER","QUANTITY_PER_CYCLE" = DBT_INTERNAL_SOURCE."QUANTITY_PER_CYCLE","ACT_PRODUCTION_HOURS" = DBT_INTERNAL_SOURCE."ACT_PRODUCTION_HOURS","ACT_SETUP_HOURS" = DBT_INTERNAL_SOURCE."ACT_SETUP_HOURS","QUANTITY_COMPLETED" = DBT_INTERNAL_SOURCE."QUANTITY_COMPLETED","SETUP_PCT_COMPLETE" = DBT_INTERNAL_SOURCE."SETUP_PCT_COMPLETE","IS_JOB_ENGINEERED" = DBT_INTERNAL_SOURCE."IS_JOB_ENGINEERED","IS_OPERATION_COMPLETE" = DBT_INTERNAL_SOURCE."IS_OPERATION_COMPLETE","IS_JOB_COMPLETE" = DBT_INTERNAL_SOURCE."IS_JOB_COMPLETE","_SYSREVID" = DBT_INTERNAL_SOURCE."_SYSREVID","_LOADED_AT" = DBT_INTERNAL_SOURCE."_LOADED_AT"
+    
 
-    select
-        company                 as company_code,
-        upper(trim(jobnum))     as job_num,
-        assemblyseq             as assembly_seqnum,
-        oprseq                  as operation_seqnum,
-        upper(trim(opcode))     as operation_code,
-        subcontract             as is_subcontract,
-        runqty                  as run_quantity,
-        estsethours             as est_setup_hours,
-        estprodhours            as est_production_hours,
-        prodstandard            as production_standard_raw,
-        stdformat               as standard_format,
-        stdbasis                as standard_basis,
-        opsperpart              as ops_per_part,
-        qtyper                  as quantity_per,
-        qtypercycle             as quantity_per_cycle,
-        actprodhours            as act_production_hours,
-        actsetuphours           as act_setup_hours,
-        qtycompleted            as quantity_completed,
-        setuppctcomplete        as setup_pct_complete,
-        jobengineered           as is_job_engineered,
-        opcomplete              as is_operation_complete,
-        jobcomplete             as is_job_complete,
-        sysrevid                as _sysrevid
-    from MATILLION_RAW.CRETEX_EPICOR_KINETIC.ERP_JOBOPER
+    when not matched then insert
+        ("COMPANY_CODE", "JOB_NUM", "ASSEMBLY_SEQNUM", "OPERATION_SEQNUM", "OPERATION_CODE", "IS_SUBCONTRACT", "RUN_QUANTITY", "EST_SETUP_HOURS", "EST_PRODUCTION_HOURS", "PRODUCTION_STANDARD_RAW", "STANDARD_FORMAT", "STANDARD_BASIS", "OPS_PER_PART", "QUANTITY_PER", "QUANTITY_PER_CYCLE", "ACT_PRODUCTION_HOURS", "ACT_SETUP_HOURS", "QUANTITY_COMPLETED", "SETUP_PCT_COMPLETE", "IS_JOB_ENGINEERED", "IS_OPERATION_COMPLETE", "IS_JOB_COMPLETE", "_SYSREVID", "_LOADED_AT")
+    values
+        ("COMPANY_CODE", "JOB_NUM", "ASSEMBLY_SEQNUM", "OPERATION_SEQNUM", "OPERATION_CODE", "IS_SUBCONTRACT", "RUN_QUANTITY", "EST_SETUP_HOURS", "EST_PRODUCTION_HOURS", "PRODUCTION_STANDARD_RAW", "STANDARD_FORMAT", "STANDARD_BASIS", "OPS_PER_PART", "QUANTITY_PER", "QUANTITY_PER_CYCLE", "ACT_PRODUCTION_HOURS", "ACT_SETUP_HOURS", "QUANTITY_COMPLETED", "SETUP_PCT_COMPLETE", "IS_JOB_ENGINEERED", "IS_OPERATION_COMPLETE", "IS_JOB_COMPLETE", "_SYSREVID", "_LOADED_AT")
 
-)
-
-select source.*, current_timestamp() as _loaded_at
-from source
-inner join SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__company_enrollment as gate
-    on source.company_code = gate.company_code
-where source.company_code <> '000000'  -- junk placeholder company, not a real enrolled company
-        );
-      
-  
+;
+    commit;

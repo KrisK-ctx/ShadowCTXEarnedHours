@@ -1,53 +1,37 @@
-
+-- back compat for old kwarg name
   
+  begin;
+    
+        
+            
+                
+                
+            
+                
+                
+            
+        
     
 
-        create or replace transient table SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__job_header
-         as
-        (
+    
 
--- Bronze: Kinetic job header. Thin rename only. Gated by the enrollment view (SD-10).
--- planned_start_quantity_not_produced -- renamed from PRODQTY (production's own trap:
--- this is the PLANNED quantity, not what was actually produced; do not mistake it for
--- quantity_produced on labor_detail/job_operation).
---
--- SD-22: job_num, part_num, part_revision are normalized with upper(trim()) -- see
--- stg_ctxepicorkinetic__labor_detail for the empirical case-variance finding. part_num /
--- part_revision case variance is also a contributing cause of the part-match-rate gap
--- (SD-21).
+    merge into SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__job_header as DBT_INTERNAL_DEST
+        using SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__job_header__dbt_tmp as DBT_INTERNAL_SOURCE
+        on (
+                    DBT_INTERNAL_SOURCE.company_code = DBT_INTERNAL_DEST.company_code
+                ) and (
+                    DBT_INTERNAL_SOURCE.job_num = DBT_INTERNAL_DEST.job_num
+                )
 
-with source as (
+    
+    when matched then update set
+        "COMPANY_CODE" = DBT_INTERNAL_SOURCE."COMPANY_CODE","JOB_NUM" = DBT_INTERNAL_SOURCE."JOB_NUM","PART_NUM" = DBT_INTERNAL_SOURCE."PART_NUM","PART_REVISION" = DBT_INTERNAL_SOURCE."PART_REVISION","PART_DESCRIPTION" = DBT_INTERNAL_SOURCE."PART_DESCRIPTION","PLANNED_START_QUANTITY_NOT_PRODUCED" = DBT_INTERNAL_SOURCE."PLANNED_START_QUANTITY_NOT_PRODUCED","JOB_TYPE" = DBT_INTERNAL_SOURCE."JOB_TYPE","IS_JOB_ENGINEERED" = DBT_INTERNAL_SOURCE."IS_JOB_ENGINEERED","IS_JOB_COMPLETE" = DBT_INTERNAL_SOURCE."IS_JOB_COMPLETE","IS_JOB_CLOSED" = DBT_INTERNAL_SOURCE."IS_JOB_CLOSED","START_DATE_TEXT" = DBT_INTERNAL_SOURCE."START_DATE_TEXT","DUE_DATE_TEXT" = DBT_INTERNAL_SOURCE."DUE_DATE_TEXT","PLANT" = DBT_INTERNAL_SOURCE."PLANT","IS_MRP_PLANNING_JOB" = DBT_INTERNAL_SOURCE."IS_MRP_PLANNING_JOB","_SYSREVID" = DBT_INTERNAL_SOURCE."_SYSREVID","_LOADED_AT" = DBT_INTERNAL_SOURCE."_LOADED_AT"
+    
 
-    select
-        company                             as company_code,
-        upper(trim(jobnum))                 as job_num,
-        upper(trim(partnum))                as part_num,
-        upper(trim(revisionnum))            as part_revision,
-        partdescription                     as part_description,
-        prodqty                             as planned_start_quantity_not_produced,
-        jobtype                             as job_type,
-        jobengineered                       as is_job_engineered,
-        jobcomplete                         as is_job_complete,
-        jobclosed                           as is_job_closed,
-        startdate                           as start_date_text,
-        duedate                             as due_date_text,
-        plant                               as plant,
-        (upper(trim(jobnum)) like 'MRP-%')  as is_mrp_planning_job,
-        sysrevid                            as _sysrevid
-    from MATILLION_RAW.CRETEX_EPICOR_KINETIC.ERP_JOBHEAD
+    when not matched then insert
+        ("COMPANY_CODE", "JOB_NUM", "PART_NUM", "PART_REVISION", "PART_DESCRIPTION", "PLANNED_START_QUANTITY_NOT_PRODUCED", "JOB_TYPE", "IS_JOB_ENGINEERED", "IS_JOB_COMPLETE", "IS_JOB_CLOSED", "START_DATE_TEXT", "DUE_DATE_TEXT", "PLANT", "IS_MRP_PLANNING_JOB", "_SYSREVID", "_LOADED_AT")
+    values
+        ("COMPANY_CODE", "JOB_NUM", "PART_NUM", "PART_REVISION", "PART_DESCRIPTION", "PLANNED_START_QUANTITY_NOT_PRODUCED", "JOB_TYPE", "IS_JOB_ENGINEERED", "IS_JOB_COMPLETE", "IS_JOB_CLOSED", "START_DATE_TEXT", "DUE_DATE_TEXT", "PLANT", "IS_MRP_PLANNING_JOB", "_SYSREVID", "_LOADED_AT")
 
-)
-
--- is_mrp_planning_job: MRP-suggested planning jobs carry large estimated hours against
--- zero produced quantity. They do not affect earned hours (which is driven by quantity
--- produced), but would badly pollute any budget/estimate-side rollup if not flagged --
--- a real source-data fact, not a stylistic choice (confirmed against the production
--- build's own documented investigation of this pattern).
-
-select source.*, current_timestamp() as _loaded_at
-from source
-inner join SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__company_enrollment as gate
-    on source.company_code = gate.company_code
-        );
-      
-  
+;
+    commit;

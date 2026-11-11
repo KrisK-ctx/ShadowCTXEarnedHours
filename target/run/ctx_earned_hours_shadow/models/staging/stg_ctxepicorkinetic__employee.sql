@@ -1,43 +1,37 @@
-
+-- back compat for old kwarg name
   
+  begin;
+    
+        
+            
+                
+                
+            
+                
+                
+            
+        
     
 
-        create or replace transient table SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__employee
-         as
-        (
+    
 
--- Bronze: Kinetic employee master. Thin rename only. Gated by the enrollment view (SD-10).
--- jc_dept (JCDEPT) is the job-costing department -- the reporting one. The separate
--- DEPARTMENT column is free-text HR data and is deliberately not carried as the
--- reporting department (same column trap production documents).
---
--- SD-22: emp_id is normalized with upper(trim()) -- see
--- stg_ctxepicorkinetic__labor_detail for the empirical case-variance finding.
+    merge into SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__employee as DBT_INTERNAL_DEST
+        using SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__employee__dbt_tmp as DBT_INTERNAL_SOURCE
+        on (
+                    DBT_INTERNAL_SOURCE.company_code = DBT_INTERNAL_DEST.company_code
+                ) and (
+                    DBT_INTERNAL_SOURCE.emp_id = DBT_INTERNAL_DEST.emp_id
+                )
 
-with source as (
+    
+    when matched then update set
+        "COMPANY_CODE" = DBT_INTERNAL_SOURCE."COMPANY_CODE","EMP_ID" = DBT_INTERNAL_SOURCE."EMP_ID","FULL_NAME" = DBT_INTERNAL_SOURCE."FULL_NAME","FIRST_NAME" = DBT_INTERNAL_SOURCE."FIRST_NAME","LAST_NAME" = DBT_INTERNAL_SOURCE."LAST_NAME","JC_DEPT" = DBT_INTERNAL_SOURCE."JC_DEPT","SHIFT_NUM" = DBT_INTERNAL_SOURCE."SHIFT_NUM","LABOR_RATE" = DBT_INTERNAL_SOURCE."LABOR_RATE","EMPLOYEE_STATUS" = DBT_INTERNAL_SOURCE."EMPLOYEE_STATUS","IS_PRODUCTION_WORKER" = DBT_INTERNAL_SOURCE."IS_PRODUCTION_WORKER","ENROLLMENT_DATE_TEXT" = DBT_INTERNAL_SOURCE."ENROLLMENT_DATE_TEXT","DEPARTURE_DATE_TEXT" = DBT_INTERNAL_SOURCE."DEPARTURE_DATE_TEXT","_SYSREVID" = DBT_INTERNAL_SOURCE."_SYSREVID","_LOADED_AT" = DBT_INTERNAL_SOURCE."_LOADED_AT"
+    
 
-    select
-        company                 as company_code,
-        upper(trim(empid))      as emp_id,
-        name                    as full_name,
-        firstname               as first_name,
-        lastname                as last_name,
-        upper(trim(jcdept))     as jc_dept,
-        shift                   as shift_num,
-        laborrate               as labor_rate,
-        empstatus               as employee_status,
-        productionworker        as is_production_worker,
-        enrollmentdate          as enrollment_date_text,
-        departuredate           as departure_date_text,
-        sysrevid                as _sysrevid
-    from MATILLION_RAW.CRETEX_EPICOR_KINETIC.ERP_EMPBASIC
+    when not matched then insert
+        ("COMPANY_CODE", "EMP_ID", "FULL_NAME", "FIRST_NAME", "LAST_NAME", "JC_DEPT", "SHIFT_NUM", "LABOR_RATE", "EMPLOYEE_STATUS", "IS_PRODUCTION_WORKER", "ENROLLMENT_DATE_TEXT", "DEPARTURE_DATE_TEXT", "_SYSREVID", "_LOADED_AT")
+    values
+        ("COMPANY_CODE", "EMP_ID", "FULL_NAME", "FIRST_NAME", "LAST_NAME", "JC_DEPT", "SHIFT_NUM", "LABOR_RATE", "EMPLOYEE_STATUS", "IS_PRODUCTION_WORKER", "ENROLLMENT_DATE_TEXT", "DEPARTURE_DATE_TEXT", "_SYSREVID", "_LOADED_AT")
 
-)
-
-select source.*, current_timestamp() as _loaded_at
-from source
-inner join SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__company_enrollment as gate
-    on source.company_code = gate.company_code
-        );
-      
-  
+;
+    commit;

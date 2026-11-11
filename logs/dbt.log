@@ -19609,3 +19609,1046 @@ having count(*) > 1
 [0m16:51:10.561336 [debug] [Dummy-1   ]: Resource report: {"command_name": "test", "command_success": true, "command_wall_clock_time": 6.8182206, "process_in_blocks": "0", "process_kernel_time": 1.26, "process_mem_max_rss": "507156", "process_out_blocks": "0", "process_user_time": 7.94}
 [0m16:51:10.562135 [debug] [Dummy-1   ]: Command `cli test` succeeded at 16:51:10.561849 after 6.82 seconds
 [0m16:51:10.562730 [debug] [Dummy-1   ]: Flushing usage events
+
+
+============================== 14:43:56.831671 | 0edaf7ea-5b49-48b8-805b-0f4aeeadfb41 ==============================
+[0m14:43:56.831671 [info ] [Dummy-1   ]: Running with dbt=1.9.4
+[0m14:43:56.832826 [debug] [Dummy-1   ]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'profiles_dir': '/tmp/dbt_effective_profiles_adbapcmh', 'fail_fast': 'False', 'version_check': 'True', 'log_path': '/tmp/dbt/logs', 'debug': 'False', 'warn_error': 'None', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'empty': 'False', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'invocation_command': 'dbt ', 'log_format': 'default', 'static_parser': 'True', 'target_path': 'None', 'introspect': 'True', 'send_anonymous_usage_stats': 'False'}
+[0m14:43:57.082281 [info ] [Dummy-1   ]: State adapter: dbt-state v0.0.0 is disabled
+[0m14:43:57.197218 [info ] [Dummy-1   ]: Registered adapter: snowflake=1.9.2
+[0m14:43:57.955228 [debug] [Dummy-1   ]: checksum: 53ed91fada2233efb98368d1716b44ab532c83a9c293cf1890b7905d5b45fb25, vars: {}, profile: , target: dev, version: 1.9.4
+[0m14:43:58.363230 [debug] [Dummy-1   ]: Partial parsing enabled: 0 files deleted, 0 files added, 0 files changed.
+[0m14:43:58.363956 [debug] [Dummy-1   ]: Partial parsing enabled, no changes found, skipping parsing
+[0m14:43:58.581944 [debug] [Dummy-1   ]: Wrote artifact WritableManifest to /tmp/dbt/target/manifest.json
+[0m14:43:58.584898 [debug] [Dummy-1   ]: Wrote artifact SemanticManifest to /tmp/dbt/target/semantic_manifest.json
+[0m14:43:58.642458 [info ] [Dummy-1   ]: Found 14 models, 29 data tests, 9 sources, 476 macros
+[0m14:43:58.646210 [info ] [Dummy-1   ]: 
+[0m14:43:58.646845 [info ] [Dummy-1   ]: Concurrency: 8 threads (target='dev')
+[0m14:43:58.647343 [info ] [Dummy-1   ]: 
+[0m14:43:58.648336 [debug] [Dummy-1   ]: Acquiring new snowflake connection 'master'
+[0m14:43:58.657677 [debug] [ThreadPool]: Acquiring new snowflake connection 'list_SANDBOX_EARNEDHOURS_SHADOW'
+[0m14:43:58.659952 [debug] [ThreadPool]: Acquiring new snowflake connection 'list_SANDBOX_EARNEDHOURS_SHADOW'
+[0m14:43:58.662268 [debug] [ThreadPool]: Acquiring new snowflake connection 'list_SANDBOX_EARNEDHOURS_SHADOW'
+[0m14:43:58.668561 [debug] [ThreadPool]: Acquiring new snowflake connection 'list_SANDBOX_EARNEDHOURS_SHADOW'
+[0m14:43:58.825265 [debug] [ThreadPool]: Using snowflake connection "list_SANDBOX_EARNEDHOURS_SHADOW"
+[0m14:43:58.826025 [debug] [ThreadPool]: Using snowflake connection "list_SANDBOX_EARNEDHOURS_SHADOW"
+[0m14:43:58.826743 [debug] [ThreadPool]: Using snowflake connection "list_SANDBOX_EARNEDHOURS_SHADOW"
+[0m14:43:58.827438 [debug] [ThreadPool]: Using snowflake connection "list_SANDBOX_EARNEDHOURS_SHADOW"
+[0m14:43:58.828130 [debug] [ThreadPool]: On list_SANDBOX_EARNEDHOURS_SHADOW: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "connection_name": "list_SANDBOX_EARNEDHOURS_SHADOW"} */
+show terse schemas in database SANDBOX_EARNEDHOURS_SHADOW
+    limit 10000
+[0m14:43:58.828756 [debug] [ThreadPool]: On list_SANDBOX_EARNEDHOURS_SHADOW: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "connection_name": "list_SANDBOX_EARNEDHOURS_SHADOW"} */
+show terse schemas in database SANDBOX_EARNEDHOURS_SHADOW
+    limit 10000
+[0m14:43:58.829368 [debug] [ThreadPool]: On list_SANDBOX_EARNEDHOURS_SHADOW: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "connection_name": "list_SANDBOX_EARNEDHOURS_SHADOW"} */
+show terse schemas in database SANDBOX_EARNEDHOURS_SHADOW
+    limit 10000
+[0m14:43:58.830024 [debug] [ThreadPool]: On list_SANDBOX_EARNEDHOURS_SHADOW: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "connection_name": "list_SANDBOX_EARNEDHOURS_SHADOW"} */
+show terse schemas in database SANDBOX_EARNEDHOURS_SHADOW
+    limit 10000
+[0m14:43:58.830682 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m14:43:58.831292 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m14:43:58.831790 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m14:43:58.832438 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m14:43:59.300478 [debug] [ThreadPool]: SQL status: SUCCESS 6 in 0.470 seconds
+[0m14:43:59.301508 [debug] [ThreadPool]: SQL status: SUCCESS 6 in 0.469 seconds
+[0m14:43:59.304711 [debug] [ThreadPool]: SQL status: SUCCESS 6 in 0.473 seconds
+[0m14:43:59.327788 [debug] [ThreadPool]: SQL status: SUCCESS 6 in 0.496 seconds
+[0m14:43:59.341045 [debug] [ThreadPool]: Acquiring new snowflake connection 'list_SANDBOX_EARNEDHOURS_SHADOW_GOLD'
+[0m14:43:59.343120 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_SANDBOX_EARNEDHOURS_SHADOW, now list_SANDBOX_EARNEDHOURS_SHADOW_PUBLIC)
+[0m14:43:59.345227 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_SANDBOX_EARNEDHOURS_SHADOW, now list_SANDBOX_EARNEDHOURS_SHADOW_BRONZE)
+[0m14:43:59.353016 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_SANDBOX_EARNEDHOURS_SHADOW, now list_SANDBOX_EARNEDHOURS_SHADOW_SILVER)
+[0m14:43:59.365356 [debug] [ThreadPool]: Using snowflake connection "list_SANDBOX_EARNEDHOURS_SHADOW_GOLD"
+[0m14:43:59.370199 [debug] [ThreadPool]: Using snowflake connection "list_SANDBOX_EARNEDHOURS_SHADOW_PUBLIC"
+[0m14:43:59.375059 [debug] [ThreadPool]: Using snowflake connection "list_SANDBOX_EARNEDHOURS_SHADOW_BRONZE"
+[0m14:43:59.379639 [debug] [ThreadPool]: Using snowflake connection "list_SANDBOX_EARNEDHOURS_SHADOW_SILVER"
+[0m14:43:59.380373 [debug] [ThreadPool]: On list_SANDBOX_EARNEDHOURS_SHADOW_GOLD: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "connection_name": "list_SANDBOX_EARNEDHOURS_SHADOW_GOLD"} */
+alter session set quoted_identifiers_ignore_case = false;
+[0m14:43:59.380961 [debug] [ThreadPool]: On list_SANDBOX_EARNEDHOURS_SHADOW_PUBLIC: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "connection_name": "list_SANDBOX_EARNEDHOURS_SHADOW_PUBLIC"} */
+alter session set quoted_identifiers_ignore_case = false;
+[0m14:43:59.381508 [debug] [ThreadPool]: On list_SANDBOX_EARNEDHOURS_SHADOW_BRONZE: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "connection_name": "list_SANDBOX_EARNEDHOURS_SHADOW_BRONZE"} */
+alter session set quoted_identifiers_ignore_case = false;
+[0m14:43:59.382056 [debug] [ThreadPool]: On list_SANDBOX_EARNEDHOURS_SHADOW_SILVER: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "connection_name": "list_SANDBOX_EARNEDHOURS_SHADOW_SILVER"} */
+alter session set quoted_identifiers_ignore_case = false;
+[0m14:43:59.382574 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m14:43:59.383057 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m14:43:59.383540 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m14:43:59.384134 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m14:43:59.873503 [debug] [ThreadPool]: SQL status: SUCCESS 1 in 0.491 seconds
+[0m14:43:59.879259 [debug] [ThreadPool]: Using snowflake connection "list_SANDBOX_EARNEDHOURS_SHADOW_GOLD"
+[0m14:43:59.879858 [debug] [ThreadPool]: On list_SANDBOX_EARNEDHOURS_SHADOW_GOLD: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "connection_name": "list_SANDBOX_EARNEDHOURS_SHADOW_GOLD"} */
+show objects in SANDBOX_EARNEDHOURS_SHADOW.GOLD
+    limit 10000
+    
+;
+[0m14:43:59.881665 [debug] [ThreadPool]: SQL status: SUCCESS 1 in 0.498 seconds
+[0m14:43:59.883827 [debug] [ThreadPool]: Using snowflake connection "list_SANDBOX_EARNEDHOURS_SHADOW_PUBLIC"
+[0m14:43:59.886720 [debug] [ThreadPool]: On list_SANDBOX_EARNEDHOURS_SHADOW_PUBLIC: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "connection_name": "list_SANDBOX_EARNEDHOURS_SHADOW_PUBLIC"} */
+show objects in SANDBOX_EARNEDHOURS_SHADOW.PUBLIC
+    limit 10000
+    
+;
+[0m14:43:59.965093 [debug] [ThreadPool]: SQL status: SUCCESS 1 in 0.581 seconds
+[0m14:43:59.967507 [debug] [ThreadPool]: Using snowflake connection "list_SANDBOX_EARNEDHOURS_SHADOW_SILVER"
+[0m14:43:59.968173 [debug] [ThreadPool]: On list_SANDBOX_EARNEDHOURS_SHADOW_SILVER: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "connection_name": "list_SANDBOX_EARNEDHOURS_SHADOW_SILVER"} */
+show objects in SANDBOX_EARNEDHOURS_SHADOW.SILVER
+    limit 10000
+    
+;
+[0m14:43:59.976198 [debug] [ThreadPool]: SQL status: SUCCESS 1 in 0.592 seconds
+[0m14:43:59.978486 [debug] [ThreadPool]: Using snowflake connection "list_SANDBOX_EARNEDHOURS_SHADOW_BRONZE"
+[0m14:43:59.979035 [debug] [ThreadPool]: On list_SANDBOX_EARNEDHOURS_SHADOW_BRONZE: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "connection_name": "list_SANDBOX_EARNEDHOURS_SHADOW_BRONZE"} */
+show objects in SANDBOX_EARNEDHOURS_SHADOW.BRONZE
+    limit 10000
+    
+;
+[0m14:43:59.997039 [debug] [ThreadPool]: SQL status: SUCCESS 5 in 0.116 seconds
+[0m14:43:59.998155 [debug] [ThreadPool]: SQL status: SUCCESS 1 in 0.111 seconds
+[0m14:44:00.000835 [debug] [ThreadPool]: Using snowflake connection "list_SANDBOX_EARNEDHOURS_SHADOW_GOLD"
+[0m14:44:00.003103 [debug] [ThreadPool]: Using snowflake connection "list_SANDBOX_EARNEDHOURS_SHADOW_PUBLIC"
+[0m14:44:00.003730 [debug] [ThreadPool]: On list_SANDBOX_EARNEDHOURS_SHADOW_GOLD: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "connection_name": "list_SANDBOX_EARNEDHOURS_SHADOW_GOLD"} */
+alter session unset quoted_identifiers_ignore_case;
+[0m14:44:00.004380 [debug] [ThreadPool]: On list_SANDBOX_EARNEDHOURS_SHADOW_PUBLIC: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "connection_name": "list_SANDBOX_EARNEDHOURS_SHADOW_PUBLIC"} */
+alter session unset quoted_identifiers_ignore_case;
+[0m14:44:00.072342 [debug] [ThreadPool]: SQL status: SUCCESS 1 in 0.067 seconds
+[0m14:44:00.087723 [debug] [ThreadPool]: SQL status: SUCCESS 6 in 0.108 seconds
+[0m14:44:00.088951 [debug] [ThreadPool]: SQL status: SUCCESS 2 in 0.120 seconds
+[0m14:44:00.091938 [debug] [ThreadPool]: Using snowflake connection "list_SANDBOX_EARNEDHOURS_SHADOW_BRONZE"
+[0m14:44:00.094409 [debug] [ThreadPool]: Using snowflake connection "list_SANDBOX_EARNEDHOURS_SHADOW_SILVER"
+[0m14:44:00.095011 [debug] [ThreadPool]: On list_SANDBOX_EARNEDHOURS_SHADOW_BRONZE: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "connection_name": "list_SANDBOX_EARNEDHOURS_SHADOW_BRONZE"} */
+alter session unset quoted_identifiers_ignore_case;
+[0m14:44:00.095552 [debug] [ThreadPool]: On list_SANDBOX_EARNEDHOURS_SHADOW_SILVER: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "connection_name": "list_SANDBOX_EARNEDHOURS_SHADOW_SILVER"} */
+alter session unset quoted_identifiers_ignore_case;
+[0m14:44:00.113277 [debug] [ThreadPool]: SQL status: SUCCESS 1 in 0.108 seconds
+[0m14:44:00.175149 [debug] [ThreadPool]: SQL status: SUCCESS 1 in 0.079 seconds
+[0m14:44:00.176080 [debug] [ThreadPool]: SQL status: SUCCESS 1 in 0.079 seconds
+[0m14:44:00.201907 [debug] [Thread-2 (]: Began running node model.ctx_earned_hours_shadow.dim_date
+[0m14:44:00.202659 [debug] [Thread-3 (]: Began running node model.ctx_earned_hours_shadow.dim_part
+[0m14:44:00.203430 [debug] [Thread-4 (]: Began running node model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__company_enrollment
+[0m14:44:00.204484 [info ] [Thread-2 (]: 1 of 14 START sql dynamic_table model GOLD.dim_date ............................ [RUN]
+[0m14:44:00.205342 [info ] [Thread-3 (]: 2 of 14 START sql dynamic_table model GOLD.dim_part ............................ [RUN]
+[0m14:44:00.206120 [info ] [Thread-4 (]: 3 of 14 START sql view model BRONZE.stg_ctxepicorkinetic__company_enrollment ... [RUN]
+[0m14:44:00.206900 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly list_SANDBOX_EARNEDHOURS_SHADOW_GOLD, now model.ctx_earned_hours_shadow.dim_date)
+[0m14:44:00.207543 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly list_SANDBOX_EARNEDHOURS_SHADOW_SILVER, now model.ctx_earned_hours_shadow.dim_part)
+[0m14:44:00.208272 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly list_SANDBOX_EARNEDHOURS_SHADOW_BRONZE, now model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__company_enrollment)
+[0m14:44:00.208900 [debug] [Thread-2 (]: Began compiling node model.ctx_earned_hours_shadow.dim_date
+[0m14:44:00.209465 [debug] [Thread-3 (]: Began compiling node model.ctx_earned_hours_shadow.dim_part
+[0m14:44:00.210040 [debug] [Thread-4 (]: Began compiling node model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__company_enrollment
+[0m14:44:00.222885 [debug] [Thread-2 (]: Writing injected SQL for node "model.ctx_earned_hours_shadow.dim_date"
+[0m14:44:00.229658 [debug] [Thread-3 (]: Writing injected SQL for node "model.ctx_earned_hours_shadow.dim_part"
+[0m14:44:00.236166 [debug] [Thread-4 (]: Writing injected SQL for node "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__company_enrollment"
+[0m14:44:00.237371 [debug] [Thread-2 (]: Began executing node model.ctx_earned_hours_shadow.dim_date
+[0m14:44:00.238206 [debug] [Thread-3 (]: Began executing node model.ctx_earned_hours_shadow.dim_part
+[0m14:44:00.256450 [debug] [Thread-4 (]: Began executing node model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__company_enrollment
+[0m14:44:00.302043 [debug] [Thread-2 (]: Using snowflake connection "model.ctx_earned_hours_shadow.dim_date"
+[0m14:44:00.305400 [debug] [Thread-3 (]: Using snowflake connection "model.ctx_earned_hours_shadow.dim_part"
+[0m14:44:00.338110 [debug] [Thread-2 (]: On model.ctx_earned_hours_shadow.dim_date: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.dim_date"} */
+alter session set quoted_identifiers_ignore_case = false;
+[0m14:44:00.351139 [debug] [Thread-4 (]: Writing runtime sql for node "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__company_enrollment"
+[0m14:44:00.351929 [debug] [Thread-3 (]: On model.ctx_earned_hours_shadow.dim_part: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.dim_part"} */
+alter session set quoted_identifiers_ignore_case = false;
+[0m14:44:00.352709 [debug] [Thread-2 (]: Opening a new connection, currently in state init
+[0m14:44:00.353575 [debug] [Thread-3 (]: Opening a new connection, currently in state init
+[0m14:44:00.354960 [debug] [Thread-4 (]: Using snowflake connection "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__company_enrollment"
+[0m14:44:00.355925 [debug] [Thread-4 (]: On model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__company_enrollment: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__company_enrollment"} */
+create or replace   view SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__company_enrollment
+  
+   as (
+    
+
+-- Bronze: Kinetic company enrollment gate, reused directly, not rebuilt (SD-10).
+-- Never hardcode a Kinetic company list anywhere downstream -- join to this model.
+
+select
+    company       as company_code,
+    isactive      as is_active_raw,
+    fiscalyear_start,
+    fiscalperiod_start,
+    fiscalyear_end,
+    fiscalperiod_end
+from MATILLION_RAW.CRETEX_EPICOR_KINETIC.CTXEPICORKINETIC_V_ANALYTICS_COMPANY_ENROLLMENT
+where isactive = 'Y'
+  );
+[0m14:44:00.356680 [debug] [Thread-4 (]: Opening a new connection, currently in state init
+[0m14:44:00.847697 [debug] [Thread-2 (]: SQL status: SUCCESS 1 in 0.495 seconds
+[0m14:44:00.848583 [debug] [Thread-2 (]: Using snowflake connection "model.ctx_earned_hours_shadow.dim_date"
+[0m14:44:00.849184 [debug] [Thread-2 (]: On model.ctx_earned_hours_shadow.dim_date: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.dim_date"} */
+show dynamic tables
+            like 'DIM_DATE'
+            in schema SANDBOX_EARNEDHOURS_SHADOW.GOLD
+        ;
+[0m14:44:00.852171 [debug] [Thread-3 (]: SQL status: SUCCESS 1 in 0.498 seconds
+[0m14:44:00.852864 [debug] [Thread-3 (]: Using snowflake connection "model.ctx_earned_hours_shadow.dim_part"
+[0m14:44:00.853459 [debug] [Thread-3 (]: On model.ctx_earned_hours_shadow.dim_part: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.dim_part"} */
+show dynamic tables
+            like 'DIM_PART'
+            in schema SANDBOX_EARNEDHOURS_SHADOW.GOLD
+        ;
+[0m14:44:01.019223 [debug] [Thread-2 (]: SQL status: SUCCESS 1 in 0.169 seconds
+[0m14:44:01.020037 [debug] [Thread-2 (]: Using snowflake connection "model.ctx_earned_hours_shadow.dim_date"
+[0m14:44:01.020695 [debug] [Thread-2 (]: On model.ctx_earned_hours_shadow.dim_date: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.dim_date"} */
+select
+            "name",
+            "schema_name",
+            "database_name",
+            "text",
+            "target_lag",
+            "warehouse",
+            "refresh_mode"
+        from table(result_scan(last_query_id()))
+[0m14:44:01.075590 [debug] [Thread-3 (]: SQL status: SUCCESS 1 in 0.221 seconds
+[0m14:44:01.076448 [debug] [Thread-3 (]: Using snowflake connection "model.ctx_earned_hours_shadow.dim_part"
+[0m14:44:01.077066 [debug] [Thread-3 (]: On model.ctx_earned_hours_shadow.dim_part: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.dim_part"} */
+select
+            "name",
+            "schema_name",
+            "database_name",
+            "text",
+            "target_lag",
+            "warehouse",
+            "refresh_mode"
+        from table(result_scan(last_query_id()))
+[0m14:44:01.198482 [debug] [Thread-4 (]: SQL status: SUCCESS 1 in 0.842 seconds
+[0m14:44:01.230970 [info ] [Thread-4 (]: 3 of 14 OK created sql view model BRONZE.stg_ctxepicorkinetic__company_enrollment  [[32mSUCCESS 1[0m in 1.02s]
+[0m14:44:01.232036 [debug] [Thread-4 (]: Finished running node model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__company_enrollment
+[0m14:44:01.233323 [debug] [Thread-6 (]: Began running node model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__department
+[0m14:44:01.233984 [debug] [Thread-7 (]: Began running node model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__employee
+[0m14:44:01.234650 [debug] [Thread-8 (]: Began running node model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_header
+[0m14:44:01.235327 [debug] [Thread-9 (]: Began running node model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_operation
+[0m14:44:01.235959 [debug] [Thread-5 (]: Began running node model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__labor_detail
+[0m14:44:01.236880 [info ] [Thread-6 (]: 4 of 14 START sql incremental model BRONZE.stg_ctxepicorkinetic__department .... [RUN]
+[0m14:44:01.237664 [info ] [Thread-7 (]: 5 of 14 START sql incremental model BRONZE.stg_ctxepicorkinetic__employee ...... [RUN]
+[0m14:44:01.238737 [info ] [Thread-8 (]: 6 of 14 START sql incremental model BRONZE.stg_ctxepicorkinetic__job_header .... [RUN]
+[0m14:44:01.239518 [info ] [Thread-9 (]: 7 of 14 START sql incremental model BRONZE.stg_ctxepicorkinetic__job_operation . [RUN]
+[0m14:44:01.240376 [info ] [Thread-5 (]: 8 of 14 START sql incremental model BRONZE.stg_ctxepicorkinetic__labor_detail .. [RUN]
+[0m14:44:01.241155 [debug] [Thread-6 (]: Re-using an available connection from the pool (formerly list_SANDBOX_EARNEDHOURS_SHADOW, now model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__department)
+[0m14:44:01.241951 [debug] [Thread-7 (]: Acquiring new snowflake connection 'model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__employee'
+[0m14:44:01.242679 [debug] [Thread-8 (]: Acquiring new snowflake connection 'model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_header'
+[0m14:44:01.243426 [debug] [Thread-9 (]: Acquiring new snowflake connection 'model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_operation'
+[0m14:44:01.244169 [debug] [Thread-5 (]: Re-using an available connection from the pool (formerly list_SANDBOX_EARNEDHOURS_SHADOW_PUBLIC, now model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__labor_detail)
+[0m14:44:01.244829 [debug] [Thread-6 (]: Began compiling node model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__department
+[0m14:44:01.245416 [debug] [Thread-7 (]: Began compiling node model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__employee
+[0m14:44:01.245980 [debug] [Thread-8 (]: Began compiling node model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_header
+[0m14:44:01.246534 [debug] [Thread-9 (]: Began compiling node model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_operation
+[0m14:44:01.247107 [debug] [Thread-5 (]: Began compiling node model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__labor_detail
+[0m14:44:01.255858 [debug] [Thread-6 (]: Writing injected SQL for node "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__department"
+[0m14:44:01.262577 [debug] [Thread-7 (]: Writing injected SQL for node "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__employee"
+[0m14:44:01.269479 [debug] [Thread-8 (]: Writing injected SQL for node "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_header"
+[0m14:44:01.276174 [debug] [Thread-9 (]: Writing injected SQL for node "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_operation"
+[0m14:44:01.283018 [debug] [Thread-5 (]: Writing injected SQL for node "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__labor_detail"
+[0m14:44:01.284305 [debug] [Thread-6 (]: Began executing node model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__department
+[0m14:44:01.285378 [debug] [Thread-7 (]: Began executing node model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__employee
+[0m14:44:01.286326 [debug] [Thread-8 (]: Began executing node model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_header
+[0m14:44:01.287113 [debug] [Thread-9 (]: Began executing node model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_operation
+[0m14:44:01.304795 [debug] [Thread-5 (]: Began executing node model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__labor_detail
+[0m14:44:01.361954 [debug] [Thread-7 (]: Using snowflake connection "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__employee"
+[0m14:44:01.357527 [debug] [Thread-6 (]: Using snowflake connection "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__department"
+[0m14:44:01.370048 [debug] [Thread-8 (]: Using snowflake connection "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_header"
+[0m14:44:01.378100 [debug] [Thread-9 (]: Using snowflake connection "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_operation"
+[0m14:44:01.388140 [debug] [Thread-5 (]: Using snowflake connection "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__labor_detail"
+[0m14:44:01.389092 [debug] [Thread-7 (]: On model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__employee: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__employee"} */
+create or replace  temporary view SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__employee__dbt_tmp
+  
+   as (
+    
+
+-- Bronze: Kinetic employee master. Thin rename only. Gated by the enrollment view (SD-10).
+-- jc_dept (JCDEPT) is the job-costing department -- the reporting one. The separate
+-- DEPARTMENT column is free-text HR data and is deliberately not carried as the
+-- reporting department (same column trap production documents).
+--
+-- SD-22: emp_id is normalized with upper(trim()) -- see
+-- stg_ctxepicorkinetic__labor_detail for the empirical case-variance finding.
+
+with source as (
+
+    select
+        company                 as company_code,
+        upper(trim(empid))      as emp_id,
+        name                    as full_name,
+        firstname               as first_name,
+        lastname                as last_name,
+        upper(trim(jcdept))     as jc_dept,
+        shift                   as shift_num,
+        laborrate               as labor_rate,
+        empstatus               as employee_status,
+        productionworker        as is_production_worker,
+        enrollmentdate          as enrollment_date_text,
+        departuredate           as departure_date_text,
+        sysrevid                as _sysrevid
+    from MATILLION_RAW.CRETEX_EPICOR_KINETIC.ERP_EMPBASIC
+
+)
+
+select source.*, current_timestamp() as _loaded_at
+from source
+inner join SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__company_enrollment as gate
+    on source.company_code = gate.company_code
+  );
+[0m14:44:01.389957 [debug] [Thread-6 (]: On model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__department: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__department"} */
+create or replace  temporary view SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__department__dbt_tmp
+  
+   as (
+    
+
+-- Bronze: Kinetic job-costing department master. Thin rename only.
+-- Gated by the enrollment view (SD-10).
+--
+-- SD-22: jc_dept is normalized with upper(trim()) defensively, for join consistency
+-- with the other models' jc_dept -- confirmed 0 case variance in this table itself.
+
+with source as (
+
+    select
+        company                 as company_code,
+        upper(trim(jcdept))     as jc_dept,
+        description             as department_description,
+        globaljcdept            as is_global_jc_dept,
+        sysrevid                as _sysrevid
+    from MATILLION_RAW.CRETEX_EPICOR_KINETIC.ERP_JCDEPT
+
+)
+
+select source.*, current_timestamp() as _loaded_at
+from source
+inner join SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__company_enrollment as gate
+    on source.company_code = gate.company_code
+  );
+[0m14:44:01.390931 [debug] [Thread-8 (]: On model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_header: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_header"} */
+create or replace  temporary view SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__job_header__dbt_tmp
+  
+   as (
+    
+
+-- Bronze: Kinetic job header. Thin rename only. Gated by the enrollment view (SD-10).
+-- planned_start_quantity_not_produced -- renamed from PRODQTY (production's own trap:
+-- this is the PLANNED quantity, not what was actually produced; do not mistake it for
+-- quantity_produced on labor_detail/job_operation).
+--
+-- SD-22: job_num, part_num, part_revision are normalized with upper(trim()) -- see
+-- stg_ctxepicorkinetic__labor_detail for the empirical case-variance finding. part_num /
+-- part_revision case variance is also a contributing cause of the part-match-rate gap
+-- (SD-21).
+
+with source as (
+
+    select
+        company                             as company_code,
+        upper(trim(jobnum))                 as job_num,
+        upper(trim(partnum))                as part_num,
+        upper(trim(revisionnum))            as part_revision,
+        partdescription                     as part_description,
+        prodqty                             as planned_start_quantity_not_produced,
+        jobtype                             as job_type,
+        jobengineered                       as is_job_engineered,
+        jobcomplete                         as is_job_complete,
+        jobclosed                           as is_job_closed,
+        startdate                           as start_date_text,
+        duedate                             as due_date_text,
+        plant                               as plant,
+        (upper(trim(jobnum)) like 'MRP-%')  as is_mrp_planning_job,
+        sysrevid                            as _sysrevid
+    from MATILLION_RAW.CRETEX_EPICOR_KINETIC.ERP_JOBHEAD
+
+)
+
+-- is_mrp_planning_job: MRP-suggested planning jobs carry large estimated hours against
+-- zero produced quantity. They do not affect earned hours (which is driven by quantity
+-- produced), but would badly pollute any budget/estimate-side rollup if not flagged --
+-- a real source-data fact, not a stylistic choice (confirmed against the production
+-- build's own documented investigation of this pattern).
+
+select source.*, current_timestamp() as _loaded_at
+from source
+inner join SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__company_enrollment as gate
+    on source.company_code = gate.company_code
+  );
+[0m14:44:01.392172 [debug] [Thread-9 (]: On model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_operation: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_operation"} */
+create or replace  temporary view SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__job_operation__dbt_tmp
+  
+   as (
+    
+
+-- Bronze: Kinetic job operations -- the only place Kinetic standard hours live.
+-- Thin rename only. Gated by the enrollment view (SD-10). Carries BOTH candidate
+-- standards (est_production_hours = budget, NOT earned hours; production_standard_raw +
+-- standard_format = the per-unit rate Silver must convert and multiply by quantity
+-- produced -- SD-11). No conversion happens here; that is Silver's job.
+--
+-- SD-22: job_num and operation_code are normalized with upper(trim()) -- see
+-- stg_ctxepicorkinetic__labor_detail for the empirical case-variance finding.
+--
+-- SD-26: setup_pct_complete added -- carries ERP_JOBOPER.SETUPPCTCOMPLETE, needed for the
+-- corrected Setup earned-hours formula (read from production's own documented business
+-- rules, not re-derived). See int_labor_standard_hours for the formula itself.
+
+with source as (
+
+    select
+        company                 as company_code,
+        upper(trim(jobnum))     as job_num,
+        assemblyseq             as assembly_seqnum,
+        oprseq                  as operation_seqnum,
+        upper(trim(opcode))     as operation_code,
+        subcontract             as is_subcontract,
+        runqty                  as run_quantity,
+        estsethours             as est_setup_hours,
+        estprodhours            as est_production_hours,
+        prodstandard            as production_standard_raw,
+        stdformat               as standard_format,
+        stdbasis                as standard_basis,
+        opsperpart              as ops_per_part,
+        qtyper                  as quantity_per,
+        qtypercycle             as quantity_per_cycle,
+        actprodhours            as act_production_hours,
+        actsetuphours           as act_setup_hours,
+        qtycompleted            as quantity_completed,
+        setuppctcomplete        as setup_pct_complete,
+        jobengineered           as is_job_engineered,
+        opcomplete              as is_operation_complete,
+        jobcomplete             as is_job_complete,
+        sysrevid                as _sysrevid
+    from MATILLION_RAW.CRETEX_EPICOR_KINETIC.ERP_JOBOPER
+
+)
+
+select source.*, current_timestamp() as _loaded_at
+from source
+inner join SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__company_enrollment as gate
+    on source.company_code = gate.company_code
+where source.company_code <> '000000'  -- junk placeholder company, not a real enrolled company
+  );
+[0m14:44:01.393500 [debug] [Thread-5 (]: On model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__labor_detail: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__labor_detail"} */
+create or replace  temporary view SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__labor_detail__dbt_tmp
+  
+   as (
+    
+
+-- Bronze: Kinetic labor detail -- the Kinetic fact source.
+-- Thin rename only, no business logic. Gated by the enrollment view (SD-10), not a
+-- hardcoded company list. Carries Epicor's native EARNEDHRS through as a plain column --
+-- NOT treated as authoritative earned hours (SD-11). The real derivation happens in
+-- int_labor_standard_hours (Silver), from the operation's per-unit standard x quantity
+-- produced. This column exists here only so Silver can cross-check against it later.
+--
+-- SD-22: job_num, employee_num, resource_group_key, operation_code are normalized with
+-- upper(trim()) -- the same real-world key is stored with inconsistent casing across rows
+-- in the raw source (confirmed empirically, e.g. 'BPQ45915' vs 'bpq45915'). Case-sensitive
+-- joins on these columns silently drop matched rows. See PROJECT_LOG.md SD-22/SD-23.
+
+with source as (
+
+    select
+        company                 as company_code,
+        laborhedseq             as labor_header_seqnum,
+        labordtlseq             as labor_detail_seqnum,
+        upper(trim(employeenum)) as employee_num,
+        labortype               as labor_type_code,
+        labortypepseudo         as labor_type_pseudo,
+        rework                  as is_rework,
+        upper(trim(jobnum))     as job_num,
+        assemblyseq             as assembly_seqnum,
+        oprseq                  as operation_seqnum,
+        upper(trim(opcode))     as operation_code,
+        upper(trim(jcdept))      as jc_dept,
+        upper(trim(resourcegrpid)) as resource_group_key,
+        laborhrs                as actual_hours,
+        burdenhrs               as burden_hours,
+        laborqty                as quantity_produced,
+        scrapqty                as quantity_scrapped,
+        earnedhrs               as native_earned_hours_crosscheck,
+        complete                as is_complete,
+        opcomplete              as is_operation_complete,
+        clockindate             as clock_in_date_text,
+        payrolldate             as payroll_date_text,
+        fiscalyear              as fiscal_year,
+        fiscalperiod            as fiscal_period,
+        postedtogl              as is_posted_to_gl,
+        wipposted               as is_wip_posted,
+        laborrate               as labor_rate,
+        burdenrate              as burden_rate,
+        sysrevid                as _sysrevid
+    from MATILLION_RAW.CRETEX_EPICOR_KINETIC.ERP_LABORDTL
+
+)
+
+-- No is_incremental() filter: the source is a full flush-and-fill snapshot (SD-03), so
+-- every run re-presents the full filtered set and the merge's unique_key does the
+-- row-level insert/update. This does not handle source-side deletes -- acceptable for
+-- now, revisit if that becomes material.
+
+select source.*, current_timestamp() as _loaded_at
+from source
+inner join SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__company_enrollment as gate
+    on source.company_code = gate.company_code
+  );
+[0m14:44:01.394408 [debug] [Thread-7 (]: Opening a new connection, currently in state init
+[0m14:44:01.394999 [debug] [Thread-6 (]: Opening a new connection, currently in state init
+[0m14:44:01.395615 [debug] [Thread-8 (]: Opening a new connection, currently in state init
+[0m14:44:01.396337 [debug] [Thread-9 (]: Opening a new connection, currently in state init
+[0m14:44:01.396941 [debug] [Thread-5 (]: Opening a new connection, currently in state init
+[0m14:44:01.569803 [debug] [Thread-3 (]: SQL status: SUCCESS 1 in 0.492 seconds
+[0m14:44:01.572733 [warn ] [Thread-3 (]: No configuration changes were identified on: `SANDBOX_EARNEDHOURS_SHADOW.GOLD.dim_part`. Continuing.
+[0m14:44:01.577966 [info ] [Thread-3 (]: 2 of 14 OK created sql dynamic_table model GOLD.dim_part ....................... [[32mskip SANDBOX_EARNEDHOURS_SHADOW.GOLD.dim_part[0m in 1.37s]
+[0m14:44:01.578970 [debug] [Thread-3 (]: Finished running node model.ctx_earned_hours_shadow.dim_part
+[0m14:44:01.591623 [debug] [Thread-2 (]: SQL status: SUCCESS 1 in 0.570 seconds
+[0m14:44:01.594244 [warn ] [Thread-2 (]: No configuration changes were identified on: `SANDBOX_EARNEDHOURS_SHADOW.GOLD.dim_date`. Continuing.
+[0m14:44:01.597204 [info ] [Thread-2 (]: 1 of 14 OK created sql dynamic_table model GOLD.dim_date ....................... [[32mskip SANDBOX_EARNEDHOURS_SHADOW.GOLD.dim_date[0m in 1.39s]
+[0m14:44:01.598120 [debug] [Thread-2 (]: Finished running node model.ctx_earned_hours_shadow.dim_date
+[0m14:44:02.231913 [debug] [Thread-6 (]: SQL status: SUCCESS 1 in 0.837 seconds
+[0m14:44:02.246932 [debug] [Thread-6 (]: Using snowflake connection "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__department"
+[0m14:44:02.247914 [debug] [Thread-7 (]: SQL status: SUCCESS 1 in 0.853 seconds
+[0m14:44:02.248733 [debug] [Thread-6 (]: On model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__department: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__department"} */
+describe table SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__department__dbt_tmp
+[0m14:44:02.254280 [debug] [Thread-7 (]: Using snowflake connection "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__employee"
+[0m14:44:02.255397 [debug] [Thread-7 (]: On model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__employee: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__employee"} */
+describe table SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__employee__dbt_tmp
+[0m14:44:02.308145 [debug] [Thread-5 (]: SQL status: SUCCESS 1 in 0.911 seconds
+[0m14:44:02.309122 [debug] [Thread-8 (]: SQL status: SUCCESS 1 in 0.913 seconds
+[0m14:44:02.309972 [debug] [Thread-9 (]: SQL status: SUCCESS 1 in 0.914 seconds
+[0m14:44:02.315775 [debug] [Thread-5 (]: Using snowflake connection "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__labor_detail"
+[0m14:44:02.450002 [debug] [Thread-6 (]: SQL status: SUCCESS 6 in 0.195 seconds
+[0m14:44:02.451037 [debug] [Thread-7 (]: SQL status: SUCCESS 14 in 0.195 seconds
+[0m14:44:02.461933 [debug] [Thread-8 (]: Using snowflake connection "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_header"
+[0m14:44:02.467527 [debug] [Thread-9 (]: Using snowflake connection "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_operation"
+[0m14:44:02.468345 [debug] [Thread-5 (]: On model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__labor_detail: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__labor_detail"} */
+describe table SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__labor_detail__dbt_tmp
+[0m14:44:02.474863 [debug] [Thread-6 (]: Using snowflake connection "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__department"
+[0m14:44:02.482082 [debug] [Thread-7 (]: Using snowflake connection "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__employee"
+[0m14:44:02.482800 [debug] [Thread-8 (]: On model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_header: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_header"} */
+describe table SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__job_header__dbt_tmp
+[0m14:44:02.483466 [debug] [Thread-9 (]: On model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_operation: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_operation"} */
+describe table SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__job_operation__dbt_tmp
+[0m14:44:02.484612 [debug] [Thread-6 (]: On model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__department: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__department"} */
+describe table SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__department
+[0m14:44:02.485285 [debug] [Thread-7 (]: On model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__employee: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__employee"} */
+describe table SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__employee
+[0m14:44:02.554168 [debug] [Thread-7 (]: SQL status: SUCCESS 14 in 0.067 seconds
+[0m14:44:02.567590 [debug] [Thread-7 (]: Using snowflake connection "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__employee"
+[0m14:44:02.568396 [debug] [Thread-7 (]: On model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__employee: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__employee"} */
+describe table "SANDBOX_EARNEDHOURS_SHADOW"."BRONZE"."STG_CTXEPICORKINETIC__EMPLOYEE"
+[0m14:44:02.579558 [debug] [Thread-9 (]: SQL status: SUCCESS 24 in 0.093 seconds
+[0m14:44:02.580689 [debug] [Thread-5 (]: SQL status: SUCCESS 30 in 0.097 seconds
+[0m14:44:02.591142 [debug] [Thread-9 (]: Using snowflake connection "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_operation"
+[0m14:44:02.599354 [debug] [Thread-5 (]: Using snowflake connection "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__labor_detail"
+[0m14:44:02.600498 [debug] [Thread-6 (]: SQL status: SUCCESS 6 in 0.114 seconds
+[0m14:44:02.601463 [debug] [Thread-8 (]: SQL status: SUCCESS 16 in 0.116 seconds
+[0m14:44:02.602154 [debug] [Thread-9 (]: On model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_operation: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_operation"} */
+describe table SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__job_operation
+[0m14:44:02.602802 [debug] [Thread-5 (]: On model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__labor_detail: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__labor_detail"} */
+describe table SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__labor_detail
+[0m14:44:02.609669 [debug] [Thread-6 (]: Using snowflake connection "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__department"
+[0m14:44:02.616679 [debug] [Thread-8 (]: Using snowflake connection "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_header"
+[0m14:44:02.618132 [debug] [Thread-6 (]: On model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__department: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__department"} */
+describe table "SANDBOX_EARNEDHOURS_SHADOW"."BRONZE"."STG_CTXEPICORKINETIC__DEPARTMENT"
+[0m14:44:02.618805 [debug] [Thread-8 (]: On model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_header: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_header"} */
+describe table SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__job_header
+[0m14:44:02.637057 [debug] [Thread-7 (]: SQL status: SUCCESS 14 in 0.068 seconds
+[0m14:44:02.689916 [debug] [Thread-9 (]: SQL status: SUCCESS 24 in 0.072 seconds
+[0m14:44:02.696378 [debug] [Thread-5 (]: SQL status: SUCCESS 30 in 0.078 seconds
+[0m14:44:02.702919 [debug] [Thread-6 (]: SQL status: SUCCESS 6 in 0.083 seconds
+[0m14:44:02.709222 [debug] [Thread-8 (]: SQL status: SUCCESS 16 in 0.089 seconds
+[0m14:44:02.735030 [debug] [Thread-9 (]: Using snowflake connection "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_operation"
+[0m14:44:02.747126 [debug] [Thread-7 (]: Writing runtime sql for node "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__employee"
+[0m14:44:02.755317 [debug] [Thread-5 (]: Using snowflake connection "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__labor_detail"
+[0m14:44:02.758827 [debug] [Thread-6 (]: Writing runtime sql for node "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__department"
+[0m14:44:02.766106 [debug] [Thread-8 (]: Using snowflake connection "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_header"
+[0m14:44:02.766970 [debug] [Thread-9 (]: On model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_operation: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_operation"} */
+describe table "SANDBOX_EARNEDHOURS_SHADOW"."BRONZE"."STG_CTXEPICORKINETIC__JOB_OPERATION"
+[0m14:44:02.768225 [debug] [Thread-5 (]: On model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__labor_detail: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__labor_detail"} */
+describe table "SANDBOX_EARNEDHOURS_SHADOW"."BRONZE"."STG_CTXEPICORKINETIC__LABOR_DETAIL"
+[0m14:44:02.770669 [debug] [Thread-7 (]: Using snowflake connection "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__employee"
+[0m14:44:02.771557 [debug] [Thread-8 (]: On model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_header: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_header"} */
+describe table "SANDBOX_EARNEDHOURS_SHADOW"."BRONZE"."STG_CTXEPICORKINETIC__JOB_HEADER"
+[0m14:44:02.773553 [debug] [Thread-6 (]: Using snowflake connection "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__department"
+[0m14:44:02.774981 [debug] [Thread-7 (]: On model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__employee: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__employee"} */
+-- back compat for old kwarg name
+  
+  begin;
+[0m14:44:02.776116 [debug] [Thread-6 (]: On model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__department: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__department"} */
+-- back compat for old kwarg name
+  
+  begin;
+[0m14:44:02.831301 [debug] [Thread-8 (]: SQL status: SUCCESS 16 in 0.055 seconds
+[0m14:44:02.836210 [debug] [Thread-8 (]: Writing runtime sql for node "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_header"
+[0m14:44:02.839001 [debug] [Thread-8 (]: Using snowflake connection "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_header"
+[0m14:44:02.839639 [debug] [Thread-8 (]: On model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_header: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_header"} */
+-- back compat for old kwarg name
+  
+  begin;
+[0m14:44:02.840907 [debug] [Thread-9 (]: SQL status: SUCCESS 24 in 0.067 seconds
+[0m14:44:02.842015 [debug] [Thread-5 (]: SQL status: SUCCESS 30 in 0.067 seconds
+[0m14:44:02.847791 [debug] [Thread-9 (]: Writing runtime sql for node "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_operation"
+[0m14:44:02.854360 [debug] [Thread-5 (]: Writing runtime sql for node "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__labor_detail"
+[0m14:44:02.858238 [debug] [Thread-9 (]: Using snowflake connection "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_operation"
+[0m14:44:02.859079 [debug] [Thread-9 (]: On model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_operation: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_operation"} */
+-- back compat for old kwarg name
+  
+  begin;
+[0m14:44:02.862612 [debug] [Thread-5 (]: Using snowflake connection "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__labor_detail"
+[0m14:44:02.863592 [debug] [Thread-5 (]: On model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__labor_detail: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__labor_detail"} */
+-- back compat for old kwarg name
+  
+  begin;
+[0m14:44:02.884572 [debug] [Thread-7 (]: SQL status: SUCCESS 1 in 0.108 seconds
+[0m14:44:02.885326 [debug] [Thread-7 (]: Using snowflake connection "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__employee"
+[0m14:44:02.886133 [debug] [Thread-7 (]: On model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__employee: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__employee"} */
+merge into SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__employee as DBT_INTERNAL_DEST
+        using SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__employee__dbt_tmp as DBT_INTERNAL_SOURCE
+        on (
+                    DBT_INTERNAL_SOURCE.company_code = DBT_INTERNAL_DEST.company_code
+                ) and (
+                    DBT_INTERNAL_SOURCE.emp_id = DBT_INTERNAL_DEST.emp_id
+                )
+
+    
+    when matched then update set
+        "COMPANY_CODE" = DBT_INTERNAL_SOURCE."COMPANY_CODE","EMP_ID" = DBT_INTERNAL_SOURCE."EMP_ID","FULL_NAME" = DBT_INTERNAL_SOURCE."FULL_NAME","FIRST_NAME" = DBT_INTERNAL_SOURCE."FIRST_NAME","LAST_NAME" = DBT_INTERNAL_SOURCE."LAST_NAME","JC_DEPT" = DBT_INTERNAL_SOURCE."JC_DEPT","SHIFT_NUM" = DBT_INTERNAL_SOURCE."SHIFT_NUM","LABOR_RATE" = DBT_INTERNAL_SOURCE."LABOR_RATE","EMPLOYEE_STATUS" = DBT_INTERNAL_SOURCE."EMPLOYEE_STATUS","IS_PRODUCTION_WORKER" = DBT_INTERNAL_SOURCE."IS_PRODUCTION_WORKER","ENROLLMENT_DATE_TEXT" = DBT_INTERNAL_SOURCE."ENROLLMENT_DATE_TEXT","DEPARTURE_DATE_TEXT" = DBT_INTERNAL_SOURCE."DEPARTURE_DATE_TEXT","_SYSREVID" = DBT_INTERNAL_SOURCE."_SYSREVID","_LOADED_AT" = DBT_INTERNAL_SOURCE."_LOADED_AT"
+    
+
+    when not matched then insert
+        ("COMPANY_CODE", "EMP_ID", "FULL_NAME", "FIRST_NAME", "LAST_NAME", "JC_DEPT", "SHIFT_NUM", "LABOR_RATE", "EMPLOYEE_STATUS", "IS_PRODUCTION_WORKER", "ENROLLMENT_DATE_TEXT", "DEPARTURE_DATE_TEXT", "_SYSREVID", "_LOADED_AT")
+    values
+        ("COMPANY_CODE", "EMP_ID", "FULL_NAME", "FIRST_NAME", "LAST_NAME", "JC_DEPT", "SHIFT_NUM", "LABOR_RATE", "EMPLOYEE_STATUS", "IS_PRODUCTION_WORKER", "ENROLLMENT_DATE_TEXT", "DEPARTURE_DATE_TEXT", "_SYSREVID", "_LOADED_AT")
+
+;
+[0m14:44:02.904193 [debug] [Thread-6 (]: SQL status: SUCCESS 1 in 0.127 seconds
+[0m14:44:02.904941 [debug] [Thread-6 (]: Using snowflake connection "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__department"
+[0m14:44:02.905666 [debug] [Thread-6 (]: On model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__department: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__department"} */
+merge into SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__department as DBT_INTERNAL_DEST
+        using SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__department__dbt_tmp as DBT_INTERNAL_SOURCE
+        on (
+                    DBT_INTERNAL_SOURCE.company_code = DBT_INTERNAL_DEST.company_code
+                ) and (
+                    DBT_INTERNAL_SOURCE.jc_dept = DBT_INTERNAL_DEST.jc_dept
+                )
+
+    
+    when matched then update set
+        "COMPANY_CODE" = DBT_INTERNAL_SOURCE."COMPANY_CODE","JC_DEPT" = DBT_INTERNAL_SOURCE."JC_DEPT","DEPARTMENT_DESCRIPTION" = DBT_INTERNAL_SOURCE."DEPARTMENT_DESCRIPTION","IS_GLOBAL_JC_DEPT" = DBT_INTERNAL_SOURCE."IS_GLOBAL_JC_DEPT","_SYSREVID" = DBT_INTERNAL_SOURCE."_SYSREVID","_LOADED_AT" = DBT_INTERNAL_SOURCE."_LOADED_AT"
+    
+
+    when not matched then insert
+        ("COMPANY_CODE", "JC_DEPT", "DEPARTMENT_DESCRIPTION", "IS_GLOBAL_JC_DEPT", "_SYSREVID", "_LOADED_AT")
+    values
+        ("COMPANY_CODE", "JC_DEPT", "DEPARTMENT_DESCRIPTION", "IS_GLOBAL_JC_DEPT", "_SYSREVID", "_LOADED_AT")
+
+;
+[0m14:44:02.948691 [debug] [Thread-8 (]: SQL status: SUCCESS 1 in 0.107 seconds
+[0m14:44:02.949758 [debug] [Thread-9 (]: SQL status: SUCCESS 1 in 0.086 seconds
+[0m14:44:02.950500 [debug] [Thread-8 (]: Using snowflake connection "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_header"
+[0m14:44:02.951276 [debug] [Thread-9 (]: Using snowflake connection "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_operation"
+[0m14:44:02.952309 [debug] [Thread-8 (]: On model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_header: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_header"} */
+merge into SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__job_header as DBT_INTERNAL_DEST
+        using SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__job_header__dbt_tmp as DBT_INTERNAL_SOURCE
+        on (
+                    DBT_INTERNAL_SOURCE.company_code = DBT_INTERNAL_DEST.company_code
+                ) and (
+                    DBT_INTERNAL_SOURCE.job_num = DBT_INTERNAL_DEST.job_num
+                )
+
+    
+    when matched then update set
+        "COMPANY_CODE" = DBT_INTERNAL_SOURCE."COMPANY_CODE","JOB_NUM" = DBT_INTERNAL_SOURCE."JOB_NUM","PART_NUM" = DBT_INTERNAL_SOURCE."PART_NUM","PART_REVISION" = DBT_INTERNAL_SOURCE."PART_REVISION","PART_DESCRIPTION" = DBT_INTERNAL_SOURCE."PART_DESCRIPTION","PLANNED_START_QUANTITY_NOT_PRODUCED" = DBT_INTERNAL_SOURCE."PLANNED_START_QUANTITY_NOT_PRODUCED","JOB_TYPE" = DBT_INTERNAL_SOURCE."JOB_TYPE","IS_JOB_ENGINEERED" = DBT_INTERNAL_SOURCE."IS_JOB_ENGINEERED","IS_JOB_COMPLETE" = DBT_INTERNAL_SOURCE."IS_JOB_COMPLETE","IS_JOB_CLOSED" = DBT_INTERNAL_SOURCE."IS_JOB_CLOSED","START_DATE_TEXT" = DBT_INTERNAL_SOURCE."START_DATE_TEXT","DUE_DATE_TEXT" = DBT_INTERNAL_SOURCE."DUE_DATE_TEXT","PLANT" = DBT_INTERNAL_SOURCE."PLANT","IS_MRP_PLANNING_JOB" = DBT_INTERNAL_SOURCE."IS_MRP_PLANNING_JOB","_SYSREVID" = DBT_INTERNAL_SOURCE."_SYSREVID","_LOADED_AT" = DBT_INTERNAL_SOURCE."_LOADED_AT"
+    
+
+    when not matched then insert
+        ("COMPANY_CODE", "JOB_NUM", "PART_NUM", "PART_REVISION", "PART_DESCRIPTION", "PLANNED_START_QUANTITY_NOT_PRODUCED", "JOB_TYPE", "IS_JOB_ENGINEERED", "IS_JOB_COMPLETE", "IS_JOB_CLOSED", "START_DATE_TEXT", "DUE_DATE_TEXT", "PLANT", "IS_MRP_PLANNING_JOB", "_SYSREVID", "_LOADED_AT")
+    values
+        ("COMPANY_CODE", "JOB_NUM", "PART_NUM", "PART_REVISION", "PART_DESCRIPTION", "PLANNED_START_QUANTITY_NOT_PRODUCED", "JOB_TYPE", "IS_JOB_ENGINEERED", "IS_JOB_COMPLETE", "IS_JOB_CLOSED", "START_DATE_TEXT", "DUE_DATE_TEXT", "PLANT", "IS_MRP_PLANNING_JOB", "_SYSREVID", "_LOADED_AT")
+
+;
+[0m14:44:02.953597 [debug] [Thread-9 (]: On model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_operation: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_operation"} */
+merge into SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__job_operation as DBT_INTERNAL_DEST
+        using SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__job_operation__dbt_tmp as DBT_INTERNAL_SOURCE
+        on (
+                    DBT_INTERNAL_SOURCE.company_code = DBT_INTERNAL_DEST.company_code
+                ) and (
+                    DBT_INTERNAL_SOURCE.job_num = DBT_INTERNAL_DEST.job_num
+                ) and (
+                    DBT_INTERNAL_SOURCE.assembly_seqnum = DBT_INTERNAL_DEST.assembly_seqnum
+                ) and (
+                    DBT_INTERNAL_SOURCE.operation_seqnum = DBT_INTERNAL_DEST.operation_seqnum
+                )
+
+    
+    when matched then update set
+        "COMPANY_CODE" = DBT_INTERNAL_SOURCE."COMPANY_CODE","JOB_NUM" = DBT_INTERNAL_SOURCE."JOB_NUM","ASSEMBLY_SEQNUM" = DBT_INTERNAL_SOURCE."ASSEMBLY_SEQNUM","OPERATION_SEQNUM" = DBT_INTERNAL_SOURCE."OPERATION_SEQNUM","OPERATION_CODE" = DBT_INTERNAL_SOURCE."OPERATION_CODE","IS_SUBCONTRACT" = DBT_INTERNAL_SOURCE."IS_SUBCONTRACT","RUN_QUANTITY" = DBT_INTERNAL_SOURCE."RUN_QUANTITY","EST_SETUP_HOURS" = DBT_INTERNAL_SOURCE."EST_SETUP_HOURS","EST_PRODUCTION_HOURS" = DBT_INTERNAL_SOURCE."EST_PRODUCTION_HOURS","PRODUCTION_STANDARD_RAW" = DBT_INTERNAL_SOURCE."PRODUCTION_STANDARD_RAW","STANDARD_FORMAT" = DBT_INTERNAL_SOURCE."STANDARD_FORMAT","STANDARD_BASIS" = DBT_INTERNAL_SOURCE."STANDARD_BASIS","OPS_PER_PART" = DBT_INTERNAL_SOURCE."OPS_PER_PART","QUANTITY_PER" = DBT_INTERNAL_SOURCE."QUANTITY_PER","QUANTITY_PER_CYCLE" = DBT_INTERNAL_SOURCE."QUANTITY_PER_CYCLE","ACT_PRODUCTION_HOURS" = DBT_INTERNAL_SOURCE."ACT_PRODUCTION_HOURS","ACT_SETUP_HOURS" = DBT_INTERNAL_SOURCE."ACT_SETUP_HOURS","QUANTITY_COMPLETED" = DBT_INTERNAL_SOURCE."QUANTITY_COMPLETED","SETUP_PCT_COMPLETE" = DBT_INTERNAL_SOURCE."SETUP_PCT_COMPLETE","IS_JOB_ENGINEERED" = DBT_INTERNAL_SOURCE."IS_JOB_ENGINEERED","IS_OPERATION_COMPLETE" = DBT_INTERNAL_SOURCE."IS_OPERATION_COMPLETE","IS_JOB_COMPLETE" = DBT_INTERNAL_SOURCE."IS_JOB_COMPLETE","_SYSREVID" = DBT_INTERNAL_SOURCE."_SYSREVID","_LOADED_AT" = DBT_INTERNAL_SOURCE."_LOADED_AT"
+    
+
+    when not matched then insert
+        ("COMPANY_CODE", "JOB_NUM", "ASSEMBLY_SEQNUM", "OPERATION_SEQNUM", "OPERATION_CODE", "IS_SUBCONTRACT", "RUN_QUANTITY", "EST_SETUP_HOURS", "EST_PRODUCTION_HOURS", "PRODUCTION_STANDARD_RAW", "STANDARD_FORMAT", "STANDARD_BASIS", "OPS_PER_PART", "QUANTITY_PER", "QUANTITY_PER_CYCLE", "ACT_PRODUCTION_HOURS", "ACT_SETUP_HOURS", "QUANTITY_COMPLETED", "SETUP_PCT_COMPLETE", "IS_JOB_ENGINEERED", "IS_OPERATION_COMPLETE", "IS_JOB_COMPLETE", "_SYSREVID", "_LOADED_AT")
+    values
+        ("COMPANY_CODE", "JOB_NUM", "ASSEMBLY_SEQNUM", "OPERATION_SEQNUM", "OPERATION_CODE", "IS_SUBCONTRACT", "RUN_QUANTITY", "EST_SETUP_HOURS", "EST_PRODUCTION_HOURS", "PRODUCTION_STANDARD_RAW", "STANDARD_FORMAT", "STANDARD_BASIS", "OPS_PER_PART", "QUANTITY_PER", "QUANTITY_PER_CYCLE", "ACT_PRODUCTION_HOURS", "ACT_SETUP_HOURS", "QUANTITY_COMPLETED", "SETUP_PCT_COMPLETE", "IS_JOB_ENGINEERED", "IS_OPERATION_COMPLETE", "IS_JOB_COMPLETE", "_SYSREVID", "_LOADED_AT")
+
+;
+[0m14:44:02.985789 [debug] [Thread-5 (]: SQL status: SUCCESS 1 in 0.121 seconds
+[0m14:44:02.986517 [debug] [Thread-5 (]: Using snowflake connection "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__labor_detail"
+[0m14:44:02.987562 [debug] [Thread-5 (]: On model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__labor_detail: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__labor_detail"} */
+merge into SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__labor_detail as DBT_INTERNAL_DEST
+        using SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__labor_detail__dbt_tmp as DBT_INTERNAL_SOURCE
+        on (
+                    DBT_INTERNAL_SOURCE.company_code = DBT_INTERNAL_DEST.company_code
+                ) and (
+                    DBT_INTERNAL_SOURCE.labor_header_seqnum = DBT_INTERNAL_DEST.labor_header_seqnum
+                ) and (
+                    DBT_INTERNAL_SOURCE.labor_detail_seqnum = DBT_INTERNAL_DEST.labor_detail_seqnum
+                )
+
+    
+    when matched then update set
+        "COMPANY_CODE" = DBT_INTERNAL_SOURCE."COMPANY_CODE","LABOR_HEADER_SEQNUM" = DBT_INTERNAL_SOURCE."LABOR_HEADER_SEQNUM","LABOR_DETAIL_SEQNUM" = DBT_INTERNAL_SOURCE."LABOR_DETAIL_SEQNUM","EMPLOYEE_NUM" = DBT_INTERNAL_SOURCE."EMPLOYEE_NUM","LABOR_TYPE_CODE" = DBT_INTERNAL_SOURCE."LABOR_TYPE_CODE","LABOR_TYPE_PSEUDO" = DBT_INTERNAL_SOURCE."LABOR_TYPE_PSEUDO","IS_REWORK" = DBT_INTERNAL_SOURCE."IS_REWORK","JOB_NUM" = DBT_INTERNAL_SOURCE."JOB_NUM","ASSEMBLY_SEQNUM" = DBT_INTERNAL_SOURCE."ASSEMBLY_SEQNUM","OPERATION_SEQNUM" = DBT_INTERNAL_SOURCE."OPERATION_SEQNUM","OPERATION_CODE" = DBT_INTERNAL_SOURCE."OPERATION_CODE","JC_DEPT" = DBT_INTERNAL_SOURCE."JC_DEPT","RESOURCE_GROUP_KEY" = DBT_INTERNAL_SOURCE."RESOURCE_GROUP_KEY","ACTUAL_HOURS" = DBT_INTERNAL_SOURCE."ACTUAL_HOURS","BURDEN_HOURS" = DBT_INTERNAL_SOURCE."BURDEN_HOURS","QUANTITY_PRODUCED" = DBT_INTERNAL_SOURCE."QUANTITY_PRODUCED","QUANTITY_SCRAPPED" = DBT_INTERNAL_SOURCE."QUANTITY_SCRAPPED","NATIVE_EARNED_HOURS_CROSSCHECK" = DBT_INTERNAL_SOURCE."NATIVE_EARNED_HOURS_CROSSCHECK","IS_COMPLETE" = DBT_INTERNAL_SOURCE."IS_COMPLETE","IS_OPERATION_COMPLETE" = DBT_INTERNAL_SOURCE."IS_OPERATION_COMPLETE","CLOCK_IN_DATE_TEXT" = DBT_INTERNAL_SOURCE."CLOCK_IN_DATE_TEXT","PAYROLL_DATE_TEXT" = DBT_INTERNAL_SOURCE."PAYROLL_DATE_TEXT","FISCAL_YEAR" = DBT_INTERNAL_SOURCE."FISCAL_YEAR","FISCAL_PERIOD" = DBT_INTERNAL_SOURCE."FISCAL_PERIOD","IS_POSTED_TO_GL" = DBT_INTERNAL_SOURCE."IS_POSTED_TO_GL","IS_WIP_POSTED" = DBT_INTERNAL_SOURCE."IS_WIP_POSTED","LABOR_RATE" = DBT_INTERNAL_SOURCE."LABOR_RATE","BURDEN_RATE" = DBT_INTERNAL_SOURCE."BURDEN_RATE","_SYSREVID" = DBT_INTERNAL_SOURCE."_SYSREVID","_LOADED_AT" = DBT_INTERNAL_SOURCE."_LOADED_AT"
+    
+
+    when not matched then insert
+        ("COMPANY_CODE", "LABOR_HEADER_SEQNUM", "LABOR_DETAIL_SEQNUM", "EMPLOYEE_NUM", "LABOR_TYPE_CODE", "LABOR_TYPE_PSEUDO", "IS_REWORK", "JOB_NUM", "ASSEMBLY_SEQNUM", "OPERATION_SEQNUM", "OPERATION_CODE", "JC_DEPT", "RESOURCE_GROUP_KEY", "ACTUAL_HOURS", "BURDEN_HOURS", "QUANTITY_PRODUCED", "QUANTITY_SCRAPPED", "NATIVE_EARNED_HOURS_CROSSCHECK", "IS_COMPLETE", "IS_OPERATION_COMPLETE", "CLOCK_IN_DATE_TEXT", "PAYROLL_DATE_TEXT", "FISCAL_YEAR", "FISCAL_PERIOD", "IS_POSTED_TO_GL", "IS_WIP_POSTED", "LABOR_RATE", "BURDEN_RATE", "_SYSREVID", "_LOADED_AT")
+    values
+        ("COMPANY_CODE", "LABOR_HEADER_SEQNUM", "LABOR_DETAIL_SEQNUM", "EMPLOYEE_NUM", "LABOR_TYPE_CODE", "LABOR_TYPE_PSEUDO", "IS_REWORK", "JOB_NUM", "ASSEMBLY_SEQNUM", "OPERATION_SEQNUM", "OPERATION_CODE", "JC_DEPT", "RESOURCE_GROUP_KEY", "ACTUAL_HOURS", "BURDEN_HOURS", "QUANTITY_PRODUCED", "QUANTITY_SCRAPPED", "NATIVE_EARNED_HOURS_CROSSCHECK", "IS_COMPLETE", "IS_OPERATION_COMPLETE", "CLOCK_IN_DATE_TEXT", "PAYROLL_DATE_TEXT", "FISCAL_YEAR", "FISCAL_PERIOD", "IS_POSTED_TO_GL", "IS_WIP_POSTED", "LABOR_RATE", "BURDEN_RATE", "_SYSREVID", "_LOADED_AT")
+
+;
+[0m14:44:04.157946 [debug] [Thread-6 (]: SQL status: SUCCESS 59 in 1.246 seconds
+[0m14:44:04.166557 [debug] [Thread-6 (]: Using snowflake connection "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__department"
+[0m14:44:04.167304 [debug] [Thread-6 (]: On model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__department: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__department"} */
+COMMIT
+[0m14:44:04.239726 [debug] [Thread-7 (]: SQL status: SUCCESS 1006 in 1.353 seconds
+[0m14:44:04.240677 [debug] [Thread-7 (]: Using snowflake connection "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__employee"
+[0m14:44:04.241277 [debug] [Thread-7 (]: On model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__employee: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__employee"} */
+COMMIT
+[0m14:44:04.542677 [debug] [Thread-6 (]: SQL status: SUCCESS 1 in 0.375 seconds
+[0m14:44:04.575408 [debug] [Thread-6 (]: Applying DROP to: SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__department__dbt_tmp
+[0m14:44:04.603303 [debug] [Thread-6 (]: Using snowflake connection "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__department"
+[0m14:44:04.604139 [debug] [Thread-6 (]: On model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__department: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__department"} */
+drop view if exists SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__department__dbt_tmp cascade
+[0m14:44:04.633785 [debug] [Thread-7 (]: SQL status: SUCCESS 1 in 0.392 seconds
+[0m14:44:04.640312 [debug] [Thread-7 (]: Applying DROP to: SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__employee__dbt_tmp
+[0m14:44:04.641984 [debug] [Thread-7 (]: Using snowflake connection "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__employee"
+[0m14:44:04.642692 [debug] [Thread-7 (]: On model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__employee: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__employee"} */
+drop view if exists SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__employee__dbt_tmp cascade
+[0m14:44:04.732790 [debug] [Thread-8 (]: SQL status: SUCCESS 19333 in 1.778 seconds
+[0m14:44:04.733656 [debug] [Thread-8 (]: Using snowflake connection "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_header"
+[0m14:44:04.734257 [debug] [Thread-8 (]: On model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_header: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_header"} */
+COMMIT
+[0m14:44:04.776082 [debug] [Thread-6 (]: SQL status: SUCCESS 1 in 0.171 seconds
+[0m14:44:04.779538 [info ] [Thread-6 (]: 4 of 14 OK created sql incremental model BRONZE.stg_ctxepicorkinetic__department  [[32mSUCCESS 59[0m in 3.54s]
+[0m14:44:04.780682 [debug] [Thread-6 (]: Finished running node model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__department
+[0m14:44:04.781763 [debug] [Thread-4 (]: Began running node model.ctx_earned_hours_shadow.dim_department
+[0m14:44:04.782623 [info ] [Thread-4 (]: 9 of 14 START sql dynamic_table model GOLD.dim_department ...................... [RUN]
+[0m14:44:04.783356 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__company_enrollment, now model.ctx_earned_hours_shadow.dim_department)
+[0m14:44:04.783940 [debug] [Thread-4 (]: Began compiling node model.ctx_earned_hours_shadow.dim_department
+[0m14:44:04.792984 [debug] [Thread-4 (]: Writing injected SQL for node "model.ctx_earned_hours_shadow.dim_department"
+[0m14:44:04.793957 [debug] [Thread-4 (]: Began executing node model.ctx_earned_hours_shadow.dim_department
+[0m14:44:04.799929 [debug] [Thread-4 (]: Using snowflake connection "model.ctx_earned_hours_shadow.dim_department"
+[0m14:44:04.801735 [debug] [Thread-4 (]: On model.ctx_earned_hours_shadow.dim_department: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.dim_department"} */
+alter session set quoted_identifiers_ignore_case = false;
+[0m14:44:04.802376 [debug] [Thread-4 (]: Opening a new connection, currently in state init
+[0m14:44:04.807941 [debug] [Thread-7 (]: SQL status: SUCCESS 1 in 0.165 seconds
+[0m14:44:04.811501 [info ] [Thread-7 (]: 5 of 14 OK created sql incremental model BRONZE.stg_ctxepicorkinetic__employee . [[32mSUCCESS 1006[0m in 3.57s]
+[0m14:44:04.812508 [debug] [Thread-7 (]: Finished running node model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__employee
+[0m14:44:04.813437 [debug] [Thread-2 (]: Began running node model.ctx_earned_hours_shadow.dim_employee
+[0m14:44:04.814219 [info ] [Thread-2 (]: 10 of 14 START sql dynamic_table model GOLD.dim_employee ....................... [RUN]
+[0m14:44:04.814896 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly model.ctx_earned_hours_shadow.dim_date, now model.ctx_earned_hours_shadow.dim_employee)
+[0m14:44:04.815456 [debug] [Thread-2 (]: Began compiling node model.ctx_earned_hours_shadow.dim_employee
+[0m14:44:04.822128 [debug] [Thread-2 (]: Writing injected SQL for node "model.ctx_earned_hours_shadow.dim_employee"
+[0m14:44:04.823020 [debug] [Thread-2 (]: Began executing node model.ctx_earned_hours_shadow.dim_employee
+[0m14:44:04.831318 [debug] [Thread-2 (]: Using snowflake connection "model.ctx_earned_hours_shadow.dim_employee"
+[0m14:44:04.832100 [debug] [Thread-2 (]: On model.ctx_earned_hours_shadow.dim_employee: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.dim_employee"} */
+alter session set quoted_identifiers_ignore_case = false;
+[0m14:44:04.832690 [debug] [Thread-2 (]: Opening a new connection, currently in state init
+[0m14:44:05.142074 [debug] [Thread-8 (]: SQL status: SUCCESS 1 in 0.407 seconds
+[0m14:44:05.148719 [debug] [Thread-8 (]: Applying DROP to: SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__job_header__dbt_tmp
+[0m14:44:05.150514 [debug] [Thread-8 (]: Using snowflake connection "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_header"
+[0m14:44:05.152107 [debug] [Thread-8 (]: On model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_header: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_header"} */
+drop view if exists SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__job_header__dbt_tmp cascade
+[0m14:44:05.323789 [debug] [Thread-8 (]: SQL status: SUCCESS 1 in 0.171 seconds
+[0m14:44:05.327308 [info ] [Thread-8 (]: 6 of 14 OK created sql incremental model BRONZE.stg_ctxepicorkinetic__job_header  [[32mSUCCESS 19333[0m in 4.08s]
+[0m14:44:05.328334 [debug] [Thread-8 (]: Finished running node model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_header
+[0m14:44:05.360284 [debug] [Thread-4 (]: SQL status: SUCCESS 1 in 0.558 seconds
+[0m14:44:05.361042 [debug] [Thread-4 (]: Using snowflake connection "model.ctx_earned_hours_shadow.dim_department"
+[0m14:44:05.361634 [debug] [Thread-4 (]: On model.ctx_earned_hours_shadow.dim_department: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.dim_department"} */
+show dynamic tables
+            like 'DIM_DEPARTMENT'
+            in schema SANDBOX_EARNEDHOURS_SHADOW.GOLD
+        ;
+[0m14:44:05.374182 [debug] [Thread-2 (]: SQL status: SUCCESS 1 in 0.541 seconds
+[0m14:44:05.374895 [debug] [Thread-2 (]: Using snowflake connection "model.ctx_earned_hours_shadow.dim_employee"
+[0m14:44:05.375473 [debug] [Thread-2 (]: On model.ctx_earned_hours_shadow.dim_employee: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.dim_employee"} */
+show dynamic tables
+            like 'DIM_EMPLOYEE'
+            in schema SANDBOX_EARNEDHOURS_SHADOW.GOLD
+        ;
+[0m14:44:05.511501 [debug] [Thread-4 (]: SQL status: SUCCESS 1 in 0.149 seconds
+[0m14:44:05.512333 [debug] [Thread-4 (]: Using snowflake connection "model.ctx_earned_hours_shadow.dim_department"
+[0m14:44:05.512947 [debug] [Thread-4 (]: On model.ctx_earned_hours_shadow.dim_department: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.dim_department"} */
+select
+            "name",
+            "schema_name",
+            "database_name",
+            "text",
+            "target_lag",
+            "warehouse",
+            "refresh_mode"
+        from table(result_scan(last_query_id()))
+[0m14:44:05.569017 [debug] [Thread-2 (]: SQL status: SUCCESS 1 in 0.193 seconds
+[0m14:44:05.569754 [debug] [Thread-2 (]: Using snowflake connection "model.ctx_earned_hours_shadow.dim_employee"
+[0m14:44:05.570347 [debug] [Thread-2 (]: On model.ctx_earned_hours_shadow.dim_employee: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.dim_employee"} */
+select
+            "name",
+            "schema_name",
+            "database_name",
+            "text",
+            "target_lag",
+            "warehouse",
+            "refresh_mode"
+        from table(result_scan(last_query_id()))
+[0m14:44:05.868041 [debug] [Thread-4 (]: SQL status: SUCCESS 1 in 0.354 seconds
+[0m14:44:05.870650 [warn ] [Thread-4 (]: No configuration changes were identified on: `SANDBOX_EARNEDHOURS_SHADOW.GOLD.dim_department`. Continuing.
+[0m14:44:05.873568 [info ] [Thread-4 (]: 9 of 14 OK created sql dynamic_table model GOLD.dim_department ................. [[32mskip SANDBOX_EARNEDHOURS_SHADOW.GOLD.dim_department[0m in 1.09s]
+[0m14:44:05.874503 [debug] [Thread-4 (]: Finished running node model.ctx_earned_hours_shadow.dim_department
+[0m14:44:06.031778 [debug] [Thread-2 (]: SQL status: SUCCESS 1 in 0.461 seconds
+[0m14:44:06.034467 [warn ] [Thread-2 (]: No configuration changes were identified on: `SANDBOX_EARNEDHOURS_SHADOW.GOLD.dim_employee`. Continuing.
+[0m14:44:06.037391 [info ] [Thread-2 (]: 10 of 14 OK created sql dynamic_table model GOLD.dim_employee .................. [[32mskip SANDBOX_EARNEDHOURS_SHADOW.GOLD.dim_employee[0m in 1.22s]
+[0m14:44:06.038276 [debug] [Thread-2 (]: Finished running node model.ctx_earned_hours_shadow.dim_employee
+[0m14:44:06.700890 [debug] [Thread-9 (]: SQL status: SUCCESS 216270 in 3.746 seconds
+[0m14:44:06.701741 [debug] [Thread-9 (]: Using snowflake connection "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_operation"
+[0m14:44:06.702354 [debug] [Thread-9 (]: On model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_operation: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_operation"} */
+COMMIT
+[0m14:44:07.091158 [debug] [Thread-9 (]: SQL status: SUCCESS 1 in 0.388 seconds
+[0m14:44:07.098165 [debug] [Thread-9 (]: Applying DROP to: SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__job_operation__dbt_tmp
+[0m14:44:07.099928 [debug] [Thread-9 (]: Using snowflake connection "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_operation"
+[0m14:44:07.100750 [debug] [Thread-9 (]: On model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_operation: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_operation"} */
+drop view if exists SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__job_operation__dbt_tmp cascade
+[0m14:44:07.246419 [debug] [Thread-9 (]: SQL status: SUCCESS 1 in 0.145 seconds
+[0m14:44:07.249925 [info ] [Thread-9 (]: 7 of 14 OK created sql incremental model BRONZE.stg_ctxepicorkinetic__job_operation  [[32mSUCCESS 216270[0m in 6.01s]
+[0m14:44:07.250857 [debug] [Thread-9 (]: Finished running node model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_operation
+[0m14:44:07.251792 [debug] [Thread-3 (]: Began running node model.ctx_earned_hours_shadow.int_labor_standard_hours
+[0m14:44:07.252711 [info ] [Thread-3 (]: 11 of 14 START sql dynamic_table model SILVER.int_labor_standard_hours ......... [RUN]
+[0m14:44:07.253424 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly model.ctx_earned_hours_shadow.dim_part, now model.ctx_earned_hours_shadow.int_labor_standard_hours)
+[0m14:44:07.253991 [debug] [Thread-3 (]: Began compiling node model.ctx_earned_hours_shadow.int_labor_standard_hours
+[0m14:44:07.261004 [debug] [Thread-3 (]: Writing injected SQL for node "model.ctx_earned_hours_shadow.int_labor_standard_hours"
+[0m14:44:07.261896 [debug] [Thread-3 (]: Began executing node model.ctx_earned_hours_shadow.int_labor_standard_hours
+[0m14:44:07.270287 [debug] [Thread-3 (]: Using snowflake connection "model.ctx_earned_hours_shadow.int_labor_standard_hours"
+[0m14:44:07.270925 [debug] [Thread-3 (]: On model.ctx_earned_hours_shadow.int_labor_standard_hours: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.int_labor_standard_hours"} */
+alter session set quoted_identifiers_ignore_case = false;
+[0m14:44:07.271484 [debug] [Thread-3 (]: Opening a new connection, currently in state init
+[0m14:44:07.374581 [debug] [Thread-5 (]: SQL status: SUCCESS 227594 in 4.386 seconds
+[0m14:44:07.375505 [debug] [Thread-5 (]: Using snowflake connection "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__labor_detail"
+[0m14:44:07.376380 [debug] [Thread-5 (]: On model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__labor_detail: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__labor_detail"} */
+COMMIT
+[0m14:44:07.707864 [debug] [Thread-5 (]: SQL status: SUCCESS 1 in 0.331 seconds
+[0m14:44:07.714562 [debug] [Thread-5 (]: Applying DROP to: SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__labor_detail__dbt_tmp
+[0m14:44:07.717103 [debug] [Thread-5 (]: Using snowflake connection "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__labor_detail"
+[0m14:44:07.717765 [debug] [Thread-5 (]: On model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__labor_detail: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__labor_detail"} */
+drop view if exists SANDBOX_EARNEDHOURS_SHADOW.BRONZE.stg_ctxepicorkinetic__labor_detail__dbt_tmp cascade
+[0m14:44:08.181090 [debug] [Thread-3 (]: SQL status: SUCCESS 1 in 0.909 seconds
+[0m14:44:08.181844 [debug] [Thread-3 (]: Using snowflake connection "model.ctx_earned_hours_shadow.int_labor_standard_hours"
+[0m14:44:08.182444 [debug] [Thread-3 (]: On model.ctx_earned_hours_shadow.int_labor_standard_hours: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.int_labor_standard_hours"} */
+show dynamic tables
+            like 'INT_LABOR_STANDARD_HOURS'
+            in schema SANDBOX_EARNEDHOURS_SHADOW.SILVER
+        ;
+[0m14:44:08.257960 [debug] [Thread-5 (]: SQL status: SUCCESS 1 in 0.539 seconds
+[0m14:44:08.261407 [info ] [Thread-5 (]: 8 of 14 OK created sql incremental model BRONZE.stg_ctxepicorkinetic__labor_detail  [[32mSUCCESS 227594[0m in 7.02s]
+[0m14:44:08.262334 [debug] [Thread-5 (]: Finished running node model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__labor_detail
+[0m14:44:08.385453 [debug] [Thread-3 (]: SQL status: SUCCESS 1 in 0.202 seconds
+[0m14:44:08.386223 [debug] [Thread-3 (]: Using snowflake connection "model.ctx_earned_hours_shadow.int_labor_standard_hours"
+[0m14:44:08.386873 [debug] [Thread-3 (]: On model.ctx_earned_hours_shadow.int_labor_standard_hours: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.int_labor_standard_hours"} */
+select
+            "name",
+            "schema_name",
+            "database_name",
+            "text",
+            "target_lag",
+            "warehouse",
+            "refresh_mode"
+        from table(result_scan(last_query_id()))
+[0m14:44:08.762586 [debug] [Thread-3 (]: SQL status: SUCCESS 1 in 0.375 seconds
+[0m14:44:08.765198 [warn ] [Thread-3 (]: No configuration changes were identified on: `SANDBOX_EARNEDHOURS_SHADOW.SILVER.int_labor_standard_hours`. Continuing.
+[0m14:44:08.768042 [info ] [Thread-3 (]: 11 of 14 OK created sql dynamic_table model SILVER.int_labor_standard_hours .... [[32mskip SANDBOX_EARNEDHOURS_SHADOW.SILVER.int_labor_standard_hours[0m in 1.51s]
+[0m14:44:08.768942 [debug] [Thread-3 (]: Finished running node model.ctx_earned_hours_shadow.int_labor_standard_hours
+[0m14:44:08.770251 [debug] [Thread-6 (]: Began running node model.ctx_earned_hours_shadow.int_labor_detail
+[0m14:44:08.771180 [info ] [Thread-6 (]: 12 of 14 START sql dynamic_table model SILVER.int_labor_detail ................. [RUN]
+[0m14:44:08.771853 [debug] [Thread-6 (]: Re-using an available connection from the pool (formerly model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__department, now model.ctx_earned_hours_shadow.int_labor_detail)
+[0m14:44:08.772530 [debug] [Thread-6 (]: Began compiling node model.ctx_earned_hours_shadow.int_labor_detail
+[0m14:44:08.779928 [debug] [Thread-6 (]: Writing injected SQL for node "model.ctx_earned_hours_shadow.int_labor_detail"
+[0m14:44:08.780851 [debug] [Thread-6 (]: Began executing node model.ctx_earned_hours_shadow.int_labor_detail
+[0m14:44:08.786527 [debug] [Thread-6 (]: Using snowflake connection "model.ctx_earned_hours_shadow.int_labor_detail"
+[0m14:44:08.787139 [debug] [Thread-6 (]: On model.ctx_earned_hours_shadow.int_labor_detail: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.int_labor_detail"} */
+alter session set quoted_identifiers_ignore_case = false;
+[0m14:44:08.787688 [debug] [Thread-6 (]: Opening a new connection, currently in state init
+[0m14:44:09.263722 [debug] [Thread-6 (]: SQL status: SUCCESS 1 in 0.476 seconds
+[0m14:44:09.264647 [debug] [Thread-6 (]: Using snowflake connection "model.ctx_earned_hours_shadow.int_labor_detail"
+[0m14:44:09.265274 [debug] [Thread-6 (]: On model.ctx_earned_hours_shadow.int_labor_detail: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.int_labor_detail"} */
+show dynamic tables
+            like 'INT_LABOR_DETAIL'
+            in schema SANDBOX_EARNEDHOURS_SHADOW.SILVER
+        ;
+[0m14:44:09.437659 [debug] [Thread-6 (]: SQL status: SUCCESS 1 in 0.172 seconds
+[0m14:44:09.438406 [debug] [Thread-6 (]: Using snowflake connection "model.ctx_earned_hours_shadow.int_labor_detail"
+[0m14:44:09.438997 [debug] [Thread-6 (]: On model.ctx_earned_hours_shadow.int_labor_detail: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.int_labor_detail"} */
+select
+            "name",
+            "schema_name",
+            "database_name",
+            "text",
+            "target_lag",
+            "warehouse",
+            "refresh_mode"
+        from table(result_scan(last_query_id()))
+[0m14:44:09.822707 [debug] [Thread-6 (]: SQL status: SUCCESS 1 in 0.383 seconds
+[0m14:44:09.825417 [warn ] [Thread-6 (]: No configuration changes were identified on: `SANDBOX_EARNEDHOURS_SHADOW.SILVER.int_labor_detail`. Continuing.
+[0m14:44:09.828448 [info ] [Thread-6 (]: 12 of 14 OK created sql dynamic_table model SILVER.int_labor_detail ............ [[32mskip SANDBOX_EARNEDHOURS_SHADOW.SILVER.int_labor_detail[0m in 1.06s]
+[0m14:44:09.829335 [debug] [Thread-6 (]: Finished running node model.ctx_earned_hours_shadow.int_labor_detail
+[0m14:44:09.830539 [debug] [Thread-4 (]: Began running node model.ctx_earned_hours_shadow.fct_labor
+[0m14:44:09.831465 [info ] [Thread-4 (]: 13 of 14 START sql dynamic_table model GOLD.fct_labor .......................... [RUN]
+[0m14:44:09.832263 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly model.ctx_earned_hours_shadow.dim_department, now model.ctx_earned_hours_shadow.fct_labor)
+[0m14:44:09.832839 [debug] [Thread-4 (]: Began compiling node model.ctx_earned_hours_shadow.fct_labor
+[0m14:44:09.843118 [debug] [Thread-4 (]: Writing injected SQL for node "model.ctx_earned_hours_shadow.fct_labor"
+[0m14:44:09.844046 [debug] [Thread-4 (]: Began executing node model.ctx_earned_hours_shadow.fct_labor
+[0m14:44:09.849784 [debug] [Thread-4 (]: Using snowflake connection "model.ctx_earned_hours_shadow.fct_labor"
+[0m14:44:09.850389 [debug] [Thread-4 (]: On model.ctx_earned_hours_shadow.fct_labor: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.fct_labor"} */
+alter session set quoted_identifiers_ignore_case = false;
+[0m14:44:09.850930 [debug] [Thread-4 (]: Opening a new connection, currently in state init
+[0m14:44:10.299148 [debug] [Thread-4 (]: SQL status: SUCCESS 1 in 0.448 seconds
+[0m14:44:10.299927 [debug] [Thread-4 (]: Using snowflake connection "model.ctx_earned_hours_shadow.fct_labor"
+[0m14:44:10.300706 [debug] [Thread-4 (]: On model.ctx_earned_hours_shadow.fct_labor: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.fct_labor"} */
+show dynamic tables
+            like 'FCT_LABOR'
+            in schema SANDBOX_EARNEDHOURS_SHADOW.GOLD
+        ;
+[0m14:44:10.501319 [debug] [Thread-4 (]: SQL status: SUCCESS 1 in 0.200 seconds
+[0m14:44:10.502067 [debug] [Thread-4 (]: Using snowflake connection "model.ctx_earned_hours_shadow.fct_labor"
+[0m14:44:10.502688 [debug] [Thread-4 (]: On model.ctx_earned_hours_shadow.fct_labor: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.fct_labor"} */
+select
+            "name",
+            "schema_name",
+            "database_name",
+            "text",
+            "target_lag",
+            "warehouse",
+            "refresh_mode"
+        from table(result_scan(last_query_id()))
+[0m14:44:10.839623 [debug] [Thread-4 (]: SQL status: SUCCESS 1 in 0.336 seconds
+[0m14:44:10.842282 [warn ] [Thread-4 (]: No configuration changes were identified on: `SANDBOX_EARNEDHOURS_SHADOW.GOLD.fct_labor`. Continuing.
+[0m14:44:10.845172 [info ] [Thread-4 (]: 13 of 14 OK created sql dynamic_table model GOLD.fct_labor ..................... [[32mskip SANDBOX_EARNEDHOURS_SHADOW.GOLD.fct_labor[0m in 1.01s]
+[0m14:44:10.846064 [debug] [Thread-4 (]: Finished running node model.ctx_earned_hours_shadow.fct_labor
+[0m14:44:10.847345 [debug] [Thread-9 (]: Began running node model.ctx_earned_hours_shadow.rec_labor_job_operation
+[0m14:44:10.848434 [info ] [Thread-9 (]: 14 of 14 START sql view model PUBLIC.rec_labor_job_operation ................... [RUN]
+[0m14:44:10.849188 [debug] [Thread-9 (]: Re-using an available connection from the pool (formerly model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_operation, now model.ctx_earned_hours_shadow.rec_labor_job_operation)
+[0m14:44:10.849763 [debug] [Thread-9 (]: Began compiling node model.ctx_earned_hours_shadow.rec_labor_job_operation
+[0m14:44:10.856769 [debug] [Thread-9 (]: Writing injected SQL for node "model.ctx_earned_hours_shadow.rec_labor_job_operation"
+[0m14:44:10.857684 [debug] [Thread-9 (]: Began executing node model.ctx_earned_hours_shadow.rec_labor_job_operation
+[0m14:44:10.863145 [debug] [Thread-9 (]: Writing runtime sql for node "model.ctx_earned_hours_shadow.rec_labor_job_operation"
+[0m14:44:10.868208 [debug] [Thread-9 (]: Using snowflake connection "model.ctx_earned_hours_shadow.rec_labor_job_operation"
+[0m14:44:10.869374 [debug] [Thread-9 (]: On model.ctx_earned_hours_shadow.rec_labor_job_operation: /* {"app": "dbt", "dbt_version": "1.9.4", "profile_name": "ctx_earned_hours_shadow", "target_name": "dev", "node_id": "model.ctx_earned_hours_shadow.rec_labor_job_operation"} */
+create or replace   view SANDBOX_EARNEDHOURS_SHADOW.PUBLIC.rec_labor_job_operation
+  
+   as (
+    -- Reconciliation (diagnostic, point-in-time -- NOT a permanent pipeline layer). Compares
+-- this build's fct_labor against the production reconciliation target at the SAME grain:
+-- company+job+operation_seqnum (LOT is always NULL for Kinetic -- confirmed against live
+-- data, so it is dropped; assembly_seqnum is summed away here too -- checked that every
+-- job+operation combo with >1 assembly is an MRP-D% placeholder planning job with zero
+-- real labor, so this causes no practical divergence for real production jobs).
+--
+-- This view's purpose is transitional: once a decision is made on this build vs.
+-- production, it has done its job and can be retired -- unlike Bronze/Silver/Gold, which
+-- are meant to persist regardless of outcome.
+
+with shadow as (
+
+    select
+        company_code,
+        job_num,
+        operation_seqnum,
+        sum(earned_hours)                     as earned_hours,
+        sum(actual_hours)                     as actual_hours,
+        sum(quantity_produced)                as quantity_produced,
+        sum(labor_txns)                        as labor_txns,
+        max(employees_involved)                as employees_involved,
+        sum(txns_no_computable_standard)       as txns_no_computable_standard,
+        max(is_mrp_planning_job)               as is_mrp_planning_job,
+        max(case when part_dim_key is null then 1 else 0 end) as part_unmatched
+    from SANDBOX_EARNEDHOURS_SHADOW.GOLD.fct_labor
+    group by company_code, job_num, operation_seqnum
+
+),
+
+production as (
+
+    select
+        company_code,
+        job                                    as job_num,
+        operation_seqnum,
+        earned_hours                           as prod_earned_hours,
+        actual_hours                           as prod_actual_hours,
+        quantity_produced                      as prod_quantity_produced,
+        labor_txns                             as prod_labor_txns,
+        employees_involved                     as prod_employees_involved
+    from CTX_EARNED_HOURS_PRD.GOLD.EARNED_HOURS_JOB_OPERATION
+    where company_code in ('CTX11002', 'CTX11003', 'CTX11101')
+
+)
+
+select
+    coalesce(shadow.company_code, production.company_code)      as company_code,
+    coalesce(shadow.job_num, production.job_num)                as job_num,
+    coalesce(shadow.operation_seqnum, production.operation_seqnum) as operation_seqnum,
+
+    shadow.earned_hours                        as shadow_earned_hours,
+    production.prod_earned_hours,
+    shadow.earned_hours - production.prod_earned_hours            as delta,
+    case
+        when production.prod_earned_hours = 0 or production.prod_earned_hours is null then null
+        else (shadow.earned_hours - production.prod_earned_hours) / abs(production.prod_earned_hours)
+    end                                         as pct_diff,
+
+    case
+        when shadow.company_code is null then 'ONLY_IN_PROD'
+        when production.company_code is null then 'ONLY_IN_SHADOW'
+        when abs(coalesce(shadow.earned_hours, 0) - coalesce(production.prod_earned_hours, 0)) <= 0.01 then 'MATCH'
+        else 'MISMATCH'
+    end                                         as match_category,
+
+    shadow.actual_hours                        as shadow_actual_hours,
+    production.prod_actual_hours,
+    shadow.quantity_produced                   as shadow_quantity_produced,
+    production.prod_quantity_produced,
+    shadow.labor_txns                          as shadow_labor_txns,
+    production.prod_labor_txns,
+
+    shadow.txns_no_computable_standard,
+    shadow.part_unmatched,
+    shadow.is_mrp_planning_job
+
+from shadow
+full outer join production
+    on  shadow.company_code     = production.company_code
+    and shadow.job_num          = production.job_num
+    and shadow.operation_seqnum = production.operation_seqnum
+  );
+[0m14:44:10.870283 [debug] [Thread-9 (]: Opening a new connection, currently in state init
+[0m14:44:11.664911 [debug] [Thread-9 (]: SQL status: SUCCESS 1 in 0.794 seconds
+[0m14:44:11.668762 [info ] [Thread-9 (]: 14 of 14 OK created sql view model PUBLIC.rec_labor_job_operation .............. [[32mSUCCESS 1[0m in 0.82s]
+[0m14:44:11.669736 [debug] [Thread-9 (]: Finished running node model.ctx_earned_hours_shadow.rec_labor_job_operation
+[0m14:44:11.674678 [debug] [Dummy-1   ]: Connection 'master' was properly closed.
+[0m14:44:11.675670 [debug] [Dummy-1   ]: Connection 'model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__labor_detail' was properly closed.
+[0m14:44:11.676554 [debug] [Dummy-1   ]: Connection 'model.ctx_earned_hours_shadow.int_labor_standard_hours' was properly closed.
+[0m14:44:11.677419 [debug] [Dummy-1   ]: Connection 'model.ctx_earned_hours_shadow.fct_labor' was properly closed.
+[0m14:44:11.678021 [debug] [Dummy-1   ]: Connection 'model.ctx_earned_hours_shadow.int_labor_detail' was properly closed.
+[0m14:44:11.678523 [debug] [Dummy-1   ]: Connection 'model.ctx_earned_hours_shadow.dim_employee' was properly closed.
+[0m14:44:11.678969 [debug] [Dummy-1   ]: Connection 'model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__employee' was properly closed.
+[0m14:44:11.679407 [debug] [Dummy-1   ]: Connection 'model.ctx_earned_hours_shadow.stg_ctxepicorkinetic__job_header' was properly closed.
+[0m14:44:11.679832 [debug] [Dummy-1   ]: Connection 'model.ctx_earned_hours_shadow.rec_labor_job_operation' was properly closed.
+[0m14:44:11.680616 [info ] [Dummy-1   ]: 
+[0m14:44:11.681143 [info ] [Dummy-1   ]: Finished running 7 dynamic table models, 5 incremental models, 2 view models in 0 hours 0 minutes and 13.03 seconds (13.03s).
+[0m14:44:11.684196 [debug] [Dummy-1   ]: Command end result
+[0m14:44:11.728162 [debug] [Dummy-1   ]: Wrote artifact WritableManifest to /tmp/dbt/target/manifest.json
+[0m14:44:11.730976 [debug] [Dummy-1   ]: Wrote artifact SemanticManifest to /tmp/dbt/target/semantic_manifest.json
+[0m14:44:11.739746 [debug] [Dummy-1   ]: Wrote artifact RunExecutionResult to /tmp/dbt/target/run_results.json
+[0m14:44:11.740415 [info ] [Dummy-1   ]: 
+[0m14:44:11.741067 [info ] [Dummy-1   ]: [32mCompleted successfully[0m
+[0m14:44:11.741572 [info ] [Dummy-1   ]: 
+[0m14:44:11.742087 [info ] [Dummy-1   ]: Done. PASS=14 WARN=0 ERROR=0 SKIP=0 TOTAL=14
+[0m14:44:11.743931 [debug] [Dummy-1   ]: Resource report: {"command_name": "run", "command_success": true, "command_wall_clock_time": 15.009675, "process_in_blocks": "0", "process_kernel_time": 1.47, "process_mem_max_rss": "504404", "process_out_blocks": "0", "process_user_time": 6.88}
+[0m14:44:11.744708 [debug] [Dummy-1   ]: Command `cli run` succeeded at 14:44:11.744431 after 15.01 seconds
+[0m14:44:11.745252 [debug] [Dummy-1   ]: Flushing usage events
